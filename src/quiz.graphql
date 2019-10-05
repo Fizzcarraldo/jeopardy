@@ -1,0 +1,47 @@
+type User {
+  id: Int
+  username: String
+  score: Int
+}
+
+input UserInput {
+  id: Int
+  username: String
+  score: Int
+}
+
+type Subscription {
+  newUser: User
+}
+
+type Mutation {
+  createUser(username: String): User,
+  updatePlayer(cat: UserInput): String,
+  deletePlayer(id: ID!): String
+}
+
+type Quiz {
+  id: Int
+  name: String
+  categories: [Category]
+}
+
+type Category {
+  id: Int
+  name: String
+  questions: [Question]
+}
+
+type Question {
+  id: Int
+  question: String
+  answer: String
+  value: Int
+}
+
+type Query {
+  getCats: [Cat]
+  getUsers: [User]
+  getQuiz: Quiz
+  findQuestionById(id: ID!): Question
+}
