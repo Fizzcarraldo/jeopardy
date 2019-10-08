@@ -8,15 +8,7 @@ export const pubsub = new PubSub();
 @Resolver('User')
 export class UserResolver {
 
-  constructor(private readonly userService: UserService) {
-    pubsub.publish('commentAdded', {
-      newUser: {
-        username: 'flo',
-        id: 1,
-        score: 13
-      }
-    });
-  }
+  constructor(private readonly userService: UserService) { }
 
   @Query()
   getUsers(): UserData[] {
@@ -28,13 +20,13 @@ export class UserResolver {
     @Args('username')
     username: string
   ): UserData {
-
-    return this.userService.createUser(username);
+    const newUser = this.userService.createUser(username);
+    pubsub.publish('newUser', {newUser});
+    return newUser;
   }
 
   @Subscription()
   newUser() {
-    console.log(pubsub);
-    subscribe: () => pubsub.asyncIterator('commentAdded');
+    return pubsub.asyncIterator('newUser');
   }
 }
