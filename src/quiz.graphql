@@ -2,6 +2,7 @@ type User {
   id: Int
   username: String
   score: Int
+  status: String
 }
 
 input UserInput {
@@ -16,9 +17,15 @@ type Subscription {
 
 type Mutation {
   createUser(username: String): User,
-  updatePlayer(cat: UserInput): String,
-  deletePlayer(id: ID!): String
 }
+
+
+type Subscription {
+  checkStatus: User
+}
+
+
+
 
 type Quiz {
   id: Int
@@ -42,6 +49,7 @@ type Question {
 type Query {
   getCats: [Cat]
   getUsers: [User]
+  findUserById(id: Int!): User
   getQuiz: Quiz
   findQuestionById(id: ID!): Question
 }

@@ -15,6 +15,14 @@ export class UserResolver {
     return this.userService.findUsers();
   }
 
+  @Query()
+  findUserById(@Args('id') id: number) {
+    console.log("foo");
+    const newUser = this.userService.findUserById(id);
+    pubsub.publish('newUser', {newUser});
+    return newUser;
+  }
+
   @Mutation()
   createUser(
     @Args('username')

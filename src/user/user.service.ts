@@ -23,6 +23,12 @@ export class UserService {
     return this.users;
   }
 
+  public findUserById(id: number): UserData {
+    return this.users.find( user => {
+      return user.id === id;
+    })
+  }
+
   public createUser(username: string): UserData {
     const newId = this.users.length + 1;
     this.users = [...this.users, {username, id: newId, score: 0}];
