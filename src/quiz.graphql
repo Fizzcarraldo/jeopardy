@@ -1,14 +1,14 @@
 type Game {
   id: Int
-  players: Player[];
-  state: State;
+  players: [Player]
+  state: String
 }
 
 type Player {
   id: Int
   name: String
   score: Int
-  status: String
+  #status: String
 }
 
 type Quiz {
@@ -24,28 +24,26 @@ type Category {
 }
 
 type Question {
-  owner: string;
-  value: number;
-  question: string;
-  image: string?;
-  answer: string;
+  owner: String
+  value: Int
+  question: String
+  image: String
+  answer: String
 }
 
-#Enum möglich?
 type Subscription {
-  refreshData: String
+  gameSubscription(gameId: Int): String
 }
 
 type Query { 
-  getGame(id: String!): Game;
-  #Immer das gesamte Quiz neu laden? 
-  getQuiz(gameId: String!, quizId: String!): Quiz;
+  getGame(id: Int!): Game
+  getQuiz(gameId: String!, quizId: String!): Quiz
 }
 
 type Mutation {
-  startNewGame(): String;
-  createUser(name: String): Player,
-  selectQuestion(questionId: String); Void;
-  pushBuzzer(id: String): Void,
-  verifyAnswer(isRight: Boolean): Void,
+  startNewGame(client: String): Int
+  createPlayer(gameId: Int!, name: String): Player
+  selectQuestion(questionId: String): Boolean
+  pushBuzzer(id: String): Boolean
+  verifyAnswer(isRight: Boolean): Boolean
 }

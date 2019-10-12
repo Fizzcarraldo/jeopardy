@@ -1,23 +1,23 @@
-enum State {
-    Lobby,
-    Select,
-    Buzzer,
-    Answer,
-    GameOver
+export enum State {
+  Lobby = "Lobby",
+  Select = "Select",
+  Buzzer = "Buzzer",
+  Answer = "Answer",
+  GameOver = "GameOver",
 }
 
 export class Game {
-  id: string;
+  id: number;
   players: Player[];
   state: State;
-  Quiz: Quiz;
+  Quiz?: Quiz;
 }
 
 export interface Player {
   id: number;
   name: string;
   score: number;
-  playerStatus: PlayerStatus;
+  playerStatus?: PlayerStatus;
 }
 
 enum PlayerStatus {
