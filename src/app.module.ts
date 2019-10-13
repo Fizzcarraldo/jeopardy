@@ -19,7 +19,6 @@ import { GameService } from './game/game.service';
     },
     GameResolver,
     GameService
-    
   ],
 })
 export class AppModule {}

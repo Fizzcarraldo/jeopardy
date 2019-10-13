@@ -10,7 +10,7 @@ export class Game {
   id: number;
   players: Player[];
   state: State;
-  Quiz?: Quiz;
+  quiz?: Quiz;
 }
 
 export interface Player {
@@ -27,7 +27,7 @@ enum PlayerStatus {
 }
 
 export class Quiz {
-  id: string;
+  id: number;
   categories: Categorie[];
 }
 
@@ -38,7 +38,8 @@ export class Categorie {
 }
 
 export class Question {
-  owner: string;
+  id: number;
+  status: string;
   value: number;
   question: string;
   image?: string;

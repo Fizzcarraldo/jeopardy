@@ -1,0 +1,42 @@
+{
+  "id": 1,
+  "categories": [{
+    "name": "cars",
+    "displayName": "Autos",
+    "questions": [{
+      "id": 1,
+      "status": "inactive",
+      "value": 100,
+      "question": "Autofrage 1",
+      "answer": "Autoantowrt 1"
+    },
+    {
+      "id": 2,
+      "status": "inactive",
+      "value": 200,
+      "question": "Autofrage 2",
+      "answer": "Autoantowrt 2"
+    },
+    {
+      "id": 3,
+      "status": "inactive",
+      "value": 300,
+      "question": "Autofrage 3",
+      "answer": "Autoantowrt 3"
+    },
+    {
+      "id": 4,
+      "status": "inactive",
+      "value": 400,
+      "question": "Autofrage 4",
+      "answer": "Autoantowrt 4"
+    },
+    {
+      "id": 5,
+      "status": "inactive",
+      "value": 500,
+      "question": "Autofrage 5",
+      "answer": "Autoantowrt 5"
+    }]
+  }]
+}

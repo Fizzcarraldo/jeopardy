@@ -18,12 +18,12 @@ type Quiz {
 }
 
 type Category {
-  id: Int
   name: String
   questions: [Question]
 }
 
 type Question {
+  id: Int
   owner: String
   value: Int
   question: String
@@ -37,13 +37,13 @@ type Subscription {
 
 type Query { 
   getGame(id: Int!): Game
-  getQuiz(gameId: String!, quizId: String!): Quiz
+  getQuiz(gameId: Int!): Quiz
 }
 
 type Mutation {
   startNewGame(client: String): Int
   createPlayer(gameId: Int!, name: String): Player
-  selectQuestion(questionId: String): Boolean
-  pushBuzzer(id: String): Boolean
+  selectQuestion(gameId: Int, categoryName: String, questionId: Int): Boolean
+  pushBuzzer(gameId: Int, playerId: Int): Boolean
   verifyAnswer(isRight: Boolean): Boolean
 }
