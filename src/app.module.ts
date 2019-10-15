@@ -3,6 +3,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { GameResolver } from './game/game.resolver';
 import { GameService } from './game/game.service';
+import { ControlService } from './game/control/control.service';
+import { ViewService } from './game/view/view.service';
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { GameService } from './game/game.service';
       useValue: new PubSub(),
     },
     GameResolver,
-    GameService
+    GameService,
+    ControlService,
+    ViewService
   ],
 })
 export class AppModule {}
