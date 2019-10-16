@@ -42,6 +42,7 @@ type Query {
 
 type Mutation {
   startNewGame(client: String): Int
+  updateGame(id: Int): Game
   createPlayer(gameId: Int!, name: String): Player
   selectQuestion(gameId: Int, categoryName: String, questionId: Int): Boolean
   pushBuzzer(gameId: Int, playerId: Int): Boolean

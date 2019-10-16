@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ControlService {
-
+/*
 public pushBuzzer(gameId: number, playerId: number): boolean {
     const game = this.getGame(gameId);
     return game.state === "Buzzer";
@@ -38,6 +38,7 @@ public pushBuzzer(gameId: number, playerId: number): boolean {
       return question.id === questionId;
     });
   }
+  */
 }
 
 

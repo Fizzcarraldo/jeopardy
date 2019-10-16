@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Game, State, Player, Quiz } from '../model/game.model';
 import { PubSub } from 'graphql-subscriptions';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 const quiz = require("../../assets/quiz.json");
 
@@ -9,9 +9,7 @@ export const pubsub = new PubSub();
 
 @Injectable()
 export class GameService {
-  private games: Subject<Game>[] = [];
-
-
+  private games: BehaviorSubject<Game>[] = [];
 
   public gameSubscription(id: number) {
     const subscriptionId = 'game-' + id;
@@ -19,26 +17,40 @@ export class GameService {
   }
 
   public startNewGame(client: string): number {
-    const newGame: Game = {
-      id: this.games.length + 1,
+    const newGameId = this.games.length + 1;
+    const newGame = new BehaviorSubject<Game>({
+      id: newGameId,
       players: [],
       state: State.Lobby,
       quiz
-    };
+    });
     this.games.push(newGame);
-    this.updateClient(newGame.id, 'new Game');
-    return newGame.id;
+    newGame.subscribe( game => {
+      this.updateSubscription(game.id, 'update');
+      console.log(game);
+    })
+    return newGameId;
   }
 
-  public getGame(id: number): Game {
+  private updateSubscription(id: number, event: string): void {
+    const subscriptionId = 'game-' + id;
+    pubsub.publish(subscriptionId, {gameSubscription: event});
+  }
+
+  public getGame(id: number): BehaviorSubject<Game> {
     return this.games.find( game => {
-      return game.id === id;
+      return game.getValue().id === id;
     })
   }
 
-
-
-
+  public updateGame(id: number): BehaviorSubject<Game> {
+    const game = this.getGame(id);
+    const update = game.getValue();
+    update.state = State.Buzzer;
+    game.next(update);
+    return game;
+  }
+  /*
 
 
   public selectQuestion(gameId, categoryName, questionId) {
@@ -46,4 +58,5 @@ export class GameService {
     question.status = "active";
     return true;
   }
+  */
 }

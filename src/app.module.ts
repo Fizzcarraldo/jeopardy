@@ -20,9 +20,7 @@ import { ViewService } from './game/view/view.service';
       useValue: new PubSub(),
     },
     GameResolver,
-    GameService,
-    ControlService,
-    ViewService
+    GameService
   ],
 })
 export class AppModule {}

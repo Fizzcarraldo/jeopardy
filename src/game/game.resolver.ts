@@ -8,12 +8,37 @@ export class GameResolver {
 
   constructor(private readonly gameService: GameService) { }
 
+  @Mutation()
+  startNewGame(
+    @Args('client') client: string
+  ): number {
+     return this.gameService.startNewGame(client);
+  }
+
   @Query()
   getGame(
     @Args('id') id: number
   ): Game {
-    return this.gameService.getGame(id);
+    return this.gameService.getGame(id).getValue();
   }
+
+  @Mutation()
+  updateGame(
+    @Args('id') id: number
+  ): Game {
+     return this.gameService.updateGame(id).getValue();
+  }
+
+  @Subscription()
+  gameSubscription(
+    @Args('gameId') gameId: number,
+  ) {
+    return this.gameService.gameSubscription(gameId);
+  }
+
+
+  /*
+
 
   @Query()
   getQuiz(
@@ -30,12 +55,7 @@ export class GameResolver {
     return this.gameService.pushBuzzer(gameId, playerId);
   }
 
-  @Mutation()
-  startNewGame(
-    @Args('client') client: string
-  ): number {
-     return this.gameService.startNewGame(client);
-  }
+
 
   @Mutation() 
   selectQuestion (
@@ -53,11 +73,5 @@ export class GameResolver {
   ): Player {
     return this.gameService.createPlayer(gameId, name);
   }
-
-  @Subscription()
-  gameSubscription(
-    @Args('gameId') gameId: number,
-  ) {
-    return this.gameService.gameSubscription(gameId);
-  }
+  */
 }
