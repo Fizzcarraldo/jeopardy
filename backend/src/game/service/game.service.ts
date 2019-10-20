@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Game, State, Player, Quiz } from '../model/game.model';
+import { Game, State, Player, Question } from '../model/game.model';
 import { PubSub } from 'graphql-subscriptions';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
-const quiz = require("../../assets/quiz.json");
+const quiz = require("../../../assets/quiz.json");
 
 export const pubsub = new PubSub();
 
@@ -21,20 +21,18 @@ export class GameService {
     const newGame = new BehaviorSubject<Game>({
       id: newGameId,
       players: [],
+      activePlayer: null,
+      activeQuestion: null,
       state: State.Lobby,
       quiz
     });
     this.games.push(newGame);
     newGame.subscribe( game => {
-      this.updateSubscription(game.id, 'update');
+      const subscriptionId = 'game-' + game.id;
+      pubsub.publish(subscriptionId, {gameSubscription: 'update'});
       console.log(game);
     })
     return newGameId;
-  }
-
-  private updateSubscription(id: number, event: string): void {
-    const subscriptionId = 'game-' + id;
-    pubsub.publish(subscriptionId, {gameSubscription: event});
   }
 
   public getGame(id: number): BehaviorSubject<Game> {
@@ -43,20 +41,17 @@ export class GameService {
     })
   }
 
-  public updateGame(id: number): BehaviorSubject<Game> {
-    const game = this.getGame(id);
-    const update = game.getValue();
-    update.state = State.Buzzer;
+  public verifyAnswer(gameId: number): Boolean {
+    const game: BehaviorSubject<Game> = this.getGame(gameId);
+    const update: Game = game.getValue();
+    const activePlayer: Player = update.activePlayer;
+    const activeQuestion: Question = update.activeQuestion;
+    activeQuestion.owner = update.activePlayer;
+    activePlayer.score = ++activeQuestion.value;
+    update.activePlayer = null;
+    update.activeQuestion = null;
+    update.state = State.Select;
     game.next(update);
-    return game;
-  }
-  /*
-
-
-  public selectQuestion(gameId, categoryName, questionId) {
-    const question = this.getQuestion(gameId, categoryName, questionId);
-    question.status = "active";
     return true;
   }
-  */
 }

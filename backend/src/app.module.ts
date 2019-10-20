@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
-import { GameResolver } from './game/game.resolver';
-import { GameService } from './game/game.service';
-import { ControlService } from './game/control/control.service';
-import { ViewService } from './game/view/view.service';
+import { SubscriptionResolver } from './game/resolver/subscription.resolver';
+import { BuzzerResolver } from './game/resolver/buzzer.resolver';
+import { StageResolver } from './game/resolver/stage.resolver';
+import { HostResolver } from './game/resolver/host.resolver';
+import { PlayerService } from './game/service/player.service';
+import { QuizService } from './game/service/quiz.service';
+import { GameService } from './game/service/game.service';
+import { StateService } from './game/service/state.service';
 
 @Module({
   imports: [
@@ -19,8 +23,14 @@ import { ViewService } from './game/view/view.service';
       provide: 'PUB_SUB',
       useValue: new PubSub(),
     },
-    GameResolver,
-    GameService
+    SubscriptionResolver,
+    BuzzerResolver,
+    StageResolver,
+    HostResolver,
+    PlayerService,
+    QuizService,
+    GameService,
+    StateService
   ],
 })
 export class AppModule {}
