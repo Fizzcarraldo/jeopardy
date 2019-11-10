@@ -36,6 +36,7 @@ type Subscription {
 }
 
 type Query { 
+  getAllGames(id: Int): [Game]
   getGame(gameId: Int!): Game
   getQuiz(gameId: Int!): Quiz
 }

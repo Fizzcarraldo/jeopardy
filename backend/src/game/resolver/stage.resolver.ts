@@ -6,9 +6,7 @@ import { GameService } from '../service/game.service';
 @Resolver('Stage')
 export class StageResolver {
 
-  constructor(
-    private readonly gameService: GameService,
-    private readonly quizService: QuizService) { }
+  constructor(private readonly gameService: GameService) { }
 
   @Mutation()
   startNewGame(
@@ -21,7 +19,15 @@ export class StageResolver {
   getGame(
     @Args('gameId') gameId: number
   ): Game {
+    console.log(this.gameService.getGame(gameId).getValue());
     return this.gameService.getGame(gameId).getValue();
+  }
+  
+
+  /*
+  getAllGames(
+  ): Game[] {
+    return this.gameService.getAllGames();
   }
 
   @Query()
@@ -30,4 +36,5 @@ export class StageResolver {
   ): Quiz {
     return this.quizService.getQuiz(gameId);
   }
+  */
 }

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { Apollo } from 'apollo-angular'
-import gql from 'graphql-tag'
-
+import { Component, OnInit } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import gql from 'graphql-tag';
+import { Game, Player, Query } from './types';
 
 @Component({
   selector: 'app-root',
@@ -9,28 +11,40 @@ import gql from 'graphql-tag'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'jga';
-
-  constructor(apollo: Apollo) {
-    apollo
-      .query({
-        query: gql`
-          {
-            query {
-              getQuiz {getQuiz(gameId: 1) { id  categories { name questions { question }} } }
-            }
+  games: Observable<Game[]>;
+  id;
+  constructor(private apollo: Apollo) { }
+  ngOnInit() {
+    this.games = this.apollo.watchQuery<Query>({
+      query: gql`
+        query getAllGames {
+          getAllGames(id: 1) {
+            id
           }
-        `,
-      })
-      .subscribe( foo => {
-        console.log(foo);
-      })
+        }
+      `
+    })
+      .valueChanges
+      .pipe(
+        map(result => {
+          console.log(result);
+          return result.data.getAllGames
+        })
+      );
   }
 
-  public foo() {
+  newGame() {
     this.apollo.mutate({
-      mutation: submitRepository
-    }).subscribe();
+      mutation: gql`
+        mutation startNewGame {
+          startNewGame(client: "flo") 
+        }
+      `
+    }).subscribe( foo => {
+      console.log( foo );
+    });
+  
   }
+
 }
 

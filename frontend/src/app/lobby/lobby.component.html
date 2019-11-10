@@ -1,0 +1,12 @@
+<p>lobby works!</p>
+<button (click)="gameService.newGame()">
+  newGame
+</button><br>
+<button (click)="gameService.loadGame()">
+  loadGame
+</button><br>
+<button (click)="gameService.initGame()">
+  initGame
+</button>
+
+{{ game?.state }}

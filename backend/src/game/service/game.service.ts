@@ -64,9 +64,15 @@ export class GameService {
     console.log(value);  
 
   }
-  */
 
-  /*
+
+  public getAllGames(): Game[] {
+    const games: Game = {id: 1}
+    return [
+    //  games
+    ]
+  }
+
   public verifyAnswer(gameId: number): Boolean {
     const game: BehaviorSubject<Game> = this.getGame(gameId);
     const update: Game = game.getValue();
