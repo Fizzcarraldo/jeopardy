@@ -11,6 +11,7 @@ export class BuzzerResolver {
     private readonly stateService: StateService
   ) { }
 
+
   @Mutation()
   createPlayer(
     @Args('gameId') gameId: number,
@@ -19,6 +20,7 @@ export class BuzzerResolver {
     return this.playerService.createPlayer(gameId, name);
   }
 
+  /*
   @Mutation()
   pushBuzzer (
     @Args('gameId') gameId: number,
@@ -31,4 +33,5 @@ export class BuzzerResolver {
     this.playerService.updateActivePlayer(gameId, playerId);
     return true;
   }
+  */
 }

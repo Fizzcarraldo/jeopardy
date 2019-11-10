@@ -7,8 +7,7 @@ export enum State {
 }
 
 export class Game {
-  id: number;
-  players: Player[];
+  players: Map <number, Player>;
   activePlayer: Player;
   activeQuestion: Question;
   state: State;
@@ -16,7 +15,6 @@ export class Game {
 }
 
 export interface Player {
-  id: number;
   name: string;
   score: number;
 }

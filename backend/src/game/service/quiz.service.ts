@@ -12,6 +12,7 @@ export class QuizService {
     private readonly playerService: PlayerService
   ) { }
 
+
   public getQuiz(gameId): Quiz {
     const game: Game = this.gameService.getGame(gameId).getValue();
     return game.quiz;
@@ -34,7 +35,4 @@ export class QuizService {
     game.next(update);
     return true;
   }
-
-
-
 }

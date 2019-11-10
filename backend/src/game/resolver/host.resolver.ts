@@ -9,6 +9,7 @@ export class HostResolver {
     private readonly quizService: QuizService,
     private readonly gameService: GameService) { }
 
+  /*
   @Mutation() 
   selectQuestion (
     @Args('gameId') gameId: number,
@@ -26,5 +27,5 @@ export class HostResolver {
   ): Boolean {
     return this.gameService.verifyAnswer(gameId);
   }
-
+*/
 }

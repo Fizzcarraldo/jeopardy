@@ -26,5 +26,11 @@ export class AppComponent {
         console.log(foo);
       })
   }
+
+  public foo() {
+    this.apollo.mutate({
+      mutation: submitRepository
+    }).subscribe();
+  }
 }
 

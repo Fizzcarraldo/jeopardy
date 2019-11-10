@@ -9,6 +9,8 @@ export const pubsub = new PubSub();
 
 @Injectable()
 export class GameService {
+
+  private gameMap = new Map();
   private games: BehaviorSubject<Game>[] = [];
 
   public gameSubscription(id: number) {
@@ -17,30 +19,54 @@ export class GameService {
   }
 
   public startNewGame(client: string): number {
-    const newGameId = this.games.length + 1;
+    const gameId = this.getNumberOfGames() + 1;
     const newGame = new BehaviorSubject<Game>({
-      id: newGameId,
-      players: [],
+      players: new Map(),
       activePlayer: null,
       activeQuestion: null,
       state: State.Lobby,
       quiz
     });
-    this.games.push(newGame);
+    this.gameMap.set(gameId, newGame);
     newGame.subscribe( game => {
-      const subscriptionId = 'game-' + game.id;
+      const subscriptionId = 'game-' + gameId;
       pubsub.publish(subscriptionId, {gameSubscription: 'update'});
       console.log(game);
     })
-    return newGameId;
+    return gameId;
   }
 
-  public getGame(id: number): BehaviorSubject<Game> {
-    return this.games.find( game => {
-      return game.getValue().id === id;
-    })
+  private getNumberOfGames(): number {
+    return this.gameMap.size;
   }
 
+  public getGame(gameId: number): BehaviorSubject<Game> {
+    return this.gameMap.get(gameId);
+  }
+
+  private getNumberOfPlayers(gameId: number): number {
+    return this.gameMap.get(gameId).getValue().players.size;
+  }
+
+  public addNewPlayer(gameId: number, player: Player): number {
+    const playerId = this.getNumberOfPlayers(gameId) + 1;
+    const game = this.gameMap.get(gameId);
+    const update = game.getValue();
+    update.players.set(playerId, player);
+    game.next(update);
+    return playerId;
+  }
+
+  /*
+  get Question
+
+  for (let value of foo.keys()) {
+    console.log(value);  
+
+  }
+  */
+
+  /*
   public verifyAnswer(gameId: number): Boolean {
     const game: BehaviorSubject<Game> = this.getGame(gameId);
     const update: Game = game.getValue();
@@ -54,4 +80,5 @@ export class GameService {
     game.next(update);
     return true;
   }
+  */
 }
