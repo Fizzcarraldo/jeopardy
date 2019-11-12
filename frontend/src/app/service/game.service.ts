@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { Game, Player, Query } from '../types';
 import gql from 'graphql-tag';
@@ -11,8 +11,10 @@ import gql from 'graphql-tag';
 })
 export class GameService {
 
-  private gameId: number; 
+  public gameId: number; 
   public game: Subject<Game> = new  Subject<Game>();
+
+  commentsQuery: QueryRef<any>;
   
   constructor(private apollo: Apollo) { }
 
@@ -27,8 +29,9 @@ export class GameService {
         }
       `
     }).subscribe( newGame => {
+      console.log('new game')
       this.gameId = newGame.data['startNewGame'];
-      this.subscribeGame()
+      this.subscribeGame();      
     });
   }
 
@@ -38,10 +41,12 @@ export class GameService {
         query getGame {
           getGame(gameId: ${this.gameId}) {
             state
+            players { name }
           }
         }
       `
     }).subscribe( foo => {
+      console.log(foo)
       this.game.next(foo.data['getGame'] as Game);
     });
   }
@@ -54,6 +59,7 @@ export class GameService {
         }`
     }).subscribe( foo => {
       console.log(foo)
+      this.loadGame();
     });
   }
 }

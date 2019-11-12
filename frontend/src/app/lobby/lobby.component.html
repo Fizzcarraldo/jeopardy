@@ -1,4 +1,5 @@
-<p>lobby works!</p>
+<p>lobby works!</p> 
+<p>{{gameService.gameId}}</p>
 <button (click)="gameService.newGame()">
   newGame
 </button><br>
@@ -8,5 +9,11 @@
 <button (click)="gameService.initGame()">
   initGame
 </button>
+<button (click)="gameService.subscribeGame()">
+  subscribeGame
+</button>
 
+<ul>
+  <li *ngFor="let player of game?.players">{{player.name}}</li>
+</ul>
 {{ game?.state }}

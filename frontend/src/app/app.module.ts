@@ -14,6 +14,7 @@ import { LobbyComponent } from './lobby/lobby.component';
 import {WebSocketLink} from 'apollo-link-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
+import { DefaultOptions } from 'apollo-client';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ export class AppModule {
 
     // Create a WebSocket link:
     const ws = new WebSocketLink({
-      uri: `ws://localhost:5000/`,
+      uri: `ws://localhost:3000/graphql`,
       options: {
         reconnect: true
       }
@@ -54,15 +55,28 @@ export class AppModule {
     const link =  split(
       // split based on operation type
       ({ query }) => {
-        const { kind } = getMainDefinition(query);
+        const { kind  } = getMainDefinition(query);
         return kind === 'OperationDefinition';
       },
       ws,
       http,
     );
+
+    const defaultOptions = {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+      },
+    }
+
     apollo.create({
       link,
-      cache: new InMemoryCache()
+      cache: new InMemoryCache(),
+      defaultOptions: defaultOptions as DefaultOptions,
     });
   }
  }
