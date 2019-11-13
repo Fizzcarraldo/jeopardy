@@ -11,6 +11,7 @@ import gql from 'graphql-tag';
 })
 export class GameService {
 
+  /*
   public gameId: number; 
   public game: Subject<Game> = new  Subject<Game>();
 
@@ -62,4 +63,6 @@ export class GameService {
       this.loadGame();
     });
   }
+
+  */
 }
