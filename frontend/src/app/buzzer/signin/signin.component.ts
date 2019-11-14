@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BuzzerService } from '../buzzer.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+  public gameId: number;
+
+  constructor(
+    public buzzerService: BuzzerService,
+    public activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.gameId = params.gameId;
+    });
   }
 
 }

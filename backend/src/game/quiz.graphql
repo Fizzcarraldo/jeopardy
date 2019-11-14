@@ -6,7 +6,6 @@ type Game {
 }
 
 type Player {
-  id: Int
   name: String
   score: Int
 }
@@ -39,11 +38,12 @@ type Query {
   getAllGames(id: Int): [Game]
   getGame(gameId: Int!): Game
   getQuiz(gameId: Int!): Quiz
+  getPlayer(gameId: Int!, playerId: Int!): Player
 }
 
 type Mutation {
   startNewGame(client: String): Int
-  createPlayer(gameId: Int!, name: String): Player
+  createPlayer(gameId: Int!, name: String): Int
   selectQuestion(gameId: Int, categoryName: String, questionId: Int): Boolean
   pushBuzzer(gameId: Int, playerId: Int): Boolean
   verifyAnswer(isRight: Boolean): Boolean

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './main/main.component';
 import { SigninComponent } from './signin/signin.component';
+import { ErrorComponent } from './error/error.component';
+import { BuzzerMainComponent } from './buzzer-main/buzzer-main.component';
 
 
 const routes: Routes = [
   { path: 'buzzer/signin/:gameId', component: SigninComponent },
-  { path: 'buzzer', component: MainComponent },
+  { path: 'buzzer/main/:gameId/:playerId', component: BuzzerMainComponent },
+  { path: 'buzzer/error', component: ErrorComponent },
 ];
 
 @NgModule({

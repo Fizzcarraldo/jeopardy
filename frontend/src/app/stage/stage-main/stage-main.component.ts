@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class StageMainComponent implements OnInit, OnDestroy {
 
+  public gameId: number;
   public game: Game;
   public gameState: typeof State =  State;
 
@@ -26,14 +27,14 @@ export class StageMainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-      const gameId = params.gameId;
-      this.stageService.initGame(gameId).subscribe( init => {
+      this.gameId = params.gameId;
+      this.stageService.initGame(this.gameId).subscribe( init => {
         if (!init.data.getGame) {
           this.router.navigate(['index'])
         }
         this.game = init.data.getGame;
       });
-      this.stageService.gameSubscription(gameId).subscribe( update => {
+      this.stageService.gameSubscription(this.gameId).subscribe( update => {
         this.game = update.data.gameSubscription;
         console.log(this.game)
       });

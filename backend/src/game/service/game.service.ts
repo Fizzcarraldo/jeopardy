@@ -57,6 +57,12 @@ export class GameService {
     return playerId;
   }
 
+  public getPlayer(gameId: number, playerId: number): Player {
+    const game = this.getGame(gameId).getValue()
+    const player = game.players.get(playerId);
+    return player;
+  }
+
   /*
   get Question
 

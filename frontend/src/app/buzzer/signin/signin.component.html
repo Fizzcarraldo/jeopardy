@@ -1,1 +1,5 @@
-<p>signin works!</p>
+<p>signin buzzer works!</p>
+<div class="input-group">
+  <input type="text" class="form-control" placeholder="name" #name>
+</div>
+<button class="btn btn-default" (click)="buzzerService.createPlayer(gameId, name.value)">create Player</button>
