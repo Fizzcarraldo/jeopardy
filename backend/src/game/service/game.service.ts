@@ -30,7 +30,7 @@ export class GameService {
     this.gameMap.set(gameId, newGame);
     newGame.subscribe( game => {
       const subscriptionId = 'game-' + gameId;
-      pubsub.publish(subscriptionId, {gameSubscription: 'update'});
+      pubsub.publish(subscriptionId, {gameSubscription: game});
       console.log(game);
     })
     return gameId;

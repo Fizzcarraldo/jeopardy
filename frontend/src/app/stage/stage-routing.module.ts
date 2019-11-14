@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LobbyComponent } from './lobby/lobby.component';
 import { IndexComponent } from './index/index.component';
+import { StageMainComponent } from './stage-main/stage-main.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
-  { path: 'stage/lobby/:gameId', component: LobbyComponent },
+  { path: 'stage/:gameId', component: StageMainComponent },
 ];
 
 @NgModule({

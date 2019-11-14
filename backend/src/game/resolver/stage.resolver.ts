@@ -1,4 +1,4 @@
-import { Args, Query, Resolver, Mutation } from '@nestjs/graphql';
+import { Args, Query, Resolver, Mutation, Subscription } from '@nestjs/graphql';
 import { Quiz, Game } from '../model/game.model';
 import { QuizService } from '../service/quiz.service';
 import { GameService } from '../service/game.service';
@@ -23,6 +23,12 @@ export class StageResolver {
     return this.gameService.getGame(gameId).getValue();
   }
   
+  @Subscription()
+  gameSubscription(
+    @Args('gameId') gameId: number,
+  ) {
+    return this.gameService.gameSubscription(gameId);
+  }
 
   /*
   getAllGames(

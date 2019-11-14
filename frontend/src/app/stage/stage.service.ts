@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Router } from '@angular/router';
+import { Router, } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Game } from './game.model';
 
 
 @Injectable({
@@ -24,7 +26,32 @@ export class StageService {
     }).subscribe( newGame => {
       console.log('new game')
       const gameId = newGame.data['startNewGame']; 
-      this.router.navigate(['stage/lobby/' + gameId])
+      this.router.navigate(['stage/' + gameId])
     });
+  }
+
+  public initGame(gameId: number): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query getGame {
+          getGame(gameId: ${gameId}) {
+            state
+            players { name }
+          }
+        }
+      `
+    })
+  }
+
+  public gameSubscription(gameId: number): Observable<any> {
+    return this.apollo.subscribe({
+      query: gql`
+        subscription gameSubscription {
+        gameSubscription(gameId: ${gameId}) {
+          state
+          players { name }
+        }
+      }`
+    })
   }
 }
