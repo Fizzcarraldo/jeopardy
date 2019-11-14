@@ -28,18 +28,18 @@ export class BuzzerResolver {
     return this.playerService.getPlayer(gameId, playerId);
   }
 
-  /*
   @Mutation()
   pushBuzzer (
     @Args('gameId') gameId: number,
     @Args('playerId') playerId: number
   ): boolean {
+    /*
     if (this.stateService.getGameState(gameId) !== State.Buzzer) {
       return false;
     };
     this.stateService.updateGameState(gameId, State.Buzzer);
     this.playerService.updateActivePlayer(gameId, playerId);
+    */
     return true;
   }
-  */
 }

@@ -13,9 +13,12 @@ import { Player } from 'src/app/stage/game.model';
 export class BuzzerMainComponent implements OnInit, OnDestroy {
 
   public player: Player;
+  private gameId: number;
+  private playerId: number;
 
   private activatedRouteSubscription: Subscription;
   private getPlayerSubscription: Subscription;
+  private pushBuzzerSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,15 +28,23 @@ export class BuzzerMainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
-      const gameId = params.gameId;
-      const playerId = params.playerId;
-      this.getPlayerSubscription = this.buzzerService.getPlayer(gameId, playerId).subscribe( result  => {
+      this.gameId = params.gameId;
+      this.playerId = params.playerId;
+      this.getPlayerSubscription = this.buzzerService.getPlayer(this.gameId, this.playerId).subscribe( result => {
         if(!result.data['getPlayer']) {
           this.router.navigate(['buzzer/error']);
         }
         this.player = result.data['getPlayer'];
       });
     });
+  }
+
+  public pushBuzzer() {
+    this.pushBuzzerSubscription = this.buzzerService.pushBuzzer(this.gameId, this.playerId).subscribe(
+      result => { 
+        console.log(result);
+      }
+    )
   }
 
   ngOnDestroy() {
@@ -43,6 +54,9 @@ export class BuzzerMainComponent implements OnInit, OnDestroy {
     if (this.getPlayerSubscription) {
       this.getPlayerSubscription.unsubscribe();
     }
+    if (this.pushBuzzerSubscription){
+      this.pushBuzzerSubscription.unsubscribe();
+    } 
   }
 
 }

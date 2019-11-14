@@ -40,4 +40,14 @@ export class BuzzerService {
       `
     })
   }
+
+  public pushBuzzer(gameId: number, playerId: number): Observable<any> {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation pushBuzzer {
+          pushBuzzer(gameId: ${gameId}, playerId: ${playerId})
+        }
+      `
+    })
+  }
 }
