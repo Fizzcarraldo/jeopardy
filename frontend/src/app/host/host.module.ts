@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { HostMianComponent } from './host-mian/host-mian.component';
+import { SharedModule } from '../shared/shared.module';
+import { HostRoutingModule } from './host-routing.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HostMianComponent
+  ],
   imports: [
-    CommonModule
+    SharedModule,
+    HostRoutingModule
   ]
 })
 export class HostModule { }

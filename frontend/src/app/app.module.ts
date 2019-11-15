@@ -6,6 +6,7 @@ import { BuzzerModule } from './buzzer/buzzer.module';
 import { StageModule } from './stage/stage.module';
 import { SharedModule } from './shared/shared.module';
 import { GraphQLModule } from './apollo.config.';
+import { HostModule } from './host/host.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { GraphQLModule } from './apollo.config.';
     SharedModule,
     StageModule,
     BuzzerModule,
+    HostModule,
     AppRoutingModule,
     BrowserModule
   ],
