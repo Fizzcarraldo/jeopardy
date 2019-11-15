@@ -2,7 +2,8 @@ type Game {
   id: Int
   players: [Player]
   activePlayer: Int
-  state: String
+  state: String,
+  quiz: Quiz
 }
 
 type Player {
@@ -46,5 +47,6 @@ type Mutation {
   createPlayer(gameId: Int!, name: String): Int
   selectQuestion(gameId: Int, categoryName: String, questionId: Int): Boolean
   pushBuzzer(gameId: Int, playerId: Int): Boolean
+  hostStartGame(gameId: Int, playerId: Int): Boolean
   verifyAnswer(isRight: Boolean): Boolean
 }

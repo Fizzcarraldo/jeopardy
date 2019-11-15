@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HostMianComponent } from './host-mian/host-mian.component';
+import { HostMainComponent } from './host-main/host-main.component';
 
 const routes: Routes = [
-  { path: 'host/:gameId', component: HostMianComponent }
+  { path: 'host/:gameId', component: HostMainComponent }
 ];
 
 @NgModule({

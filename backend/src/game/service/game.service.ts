@@ -57,6 +57,14 @@ export class GameService {
     return playerId;
   }
 
+  public changeGameState(gameId: number, state: State): boolean {
+    const game = this.gameMap.get(gameId);
+    const update = game.getValue();
+    update.state = state;
+    game.next(update);
+    return true;
+  }
+
   public getPlayer(gameId: number, playerId: number): Player {
     const game = this.getGame(gameId).getValue()
     const player = game.players.get(playerId);

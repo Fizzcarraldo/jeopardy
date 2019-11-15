@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { HostMianComponent } from './host-mian/host-mian.component';
 import { SharedModule } from '../shared/shared.module';
 import { HostRoutingModule } from './host-routing.module';
+import { SelectQuestionComponent } from './host-main/select-question/select-question.component';
+import { HostMainComponent } from './host-main/host-main.component';
 
 
 
 @NgModule({
   declarations: [
-    HostMianComponent
+    SelectQuestionComponent,
+    HostMainComponent
   ],
   imports: [
     SharedModule,

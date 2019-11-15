@@ -1,0 +1,9 @@
+<p>quiz works!</p>
+{{quiz?.id}}
+
+<div *ngFor="let categorie of quiz?.categories">
+  <div>{{categorie.name}}</div>
+  <div *ngFor="let question of categorie.questions">
+    {{question.question}}
+  </div>
+</div>

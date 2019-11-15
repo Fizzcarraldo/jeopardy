@@ -34,10 +34,7 @@ export class StageService {
     return this.apollo.query({
       query: gql`
         query getGame {
-          getGame(gameId: ${gameId}) {
-            state
-            players { name }
-          }
+          getGame(gameId: ${gameId}) { state id players { name } quiz { id categories { name questions { question } } } }
         }
       `
     })
@@ -47,10 +44,7 @@ export class StageService {
     return this.apollo.subscribe({
       query: gql`
         subscription gameSubscription {
-        gameSubscription(gameId: ${gameId}) {
-          state
-          players { name }
-        }
+        gameSubscription(gameId: ${gameId}) { state id players { name } quiz { id categories { name questions { question } } } }
       }`
     })
   }

@@ -1,4 +1,5 @@
 <p>stage-main works!</p>
 <app-lobby *ngIf="game?.state === gameState.Lobby"></app-lobby>
 <app-player-list [players]="game?.players"></app-player-list>
+<app-quiz *ngIf="game?.state === gameState.Select" [quiz]="game?.quiz"></app-quiz>
 {{game?.state}}

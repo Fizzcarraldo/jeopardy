@@ -1,0 +1,5 @@
+<p>host-mian works!</p>
+{{game?.state}}
+{{game?.state }}
+<button *ngIf="game?.state === gameState.Lobby" class="btn btn-default" (click)="startGame()">start Game</button>
+<app-select-question *ngIf="game?.state === gameState.Select" [quiz]="game?.quiz"></app-select-question>

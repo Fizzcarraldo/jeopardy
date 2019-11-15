@@ -5,11 +5,11 @@ import { Game, State } from 'src/app/stage/game.model';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-host-mian',
-  templateUrl: './host-mian.component.html',
-  styleUrls: ['./host-mian.component.scss']
+  selector: 'app-host-main',
+  templateUrl: './host-main.component.html',
+  styleUrls: ['./host-main.component.scss']
 })
-export class HostMianComponent implements OnInit, OnDestroy {
+export class HostMainComponent implements OnInit {
 
   public gameId: number;
   public game: Game;
@@ -29,10 +29,10 @@ export class HostMianComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.gameId = params.gameId;
       this.hostService.initHost(this.gameId).subscribe( init => {
-        console.log('foo')
-        if (!init.data.getGame) {
+        if (!init.data) {
           this.router.navigate(['index'])
         }
+        console.log(init)
         this.game = init.data.getGame;
         console.log(this.game)
       }); 
@@ -41,6 +41,10 @@ export class HostMianComponent implements OnInit, OnDestroy {
         console.log(this.game)
       });
     });
+  }
+
+  public startGame() {
+    this.hostService.hostStartGame(this.gameId);
   }
 
   ngOnDestroy() { 
