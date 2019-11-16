@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Quiz } from '../../game.model';
+import { Quiz } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-quiz',

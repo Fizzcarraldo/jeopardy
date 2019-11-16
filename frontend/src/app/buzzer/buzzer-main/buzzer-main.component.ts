@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { BuzzerService } from '../buzzer.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Player } from 'src/app/stage/game.model';
+import { Player } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-buzzer-main',

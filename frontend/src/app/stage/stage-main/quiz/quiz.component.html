@@ -2,8 +2,8 @@
 {{quiz?.id}}
 
 <div *ngFor="let categorie of quiz?.categories">
-  <div>{{categorie.name}}</div>
-  <div *ngFor="let question of categorie.questions">
-    {{question.question}}
+  <div>{{categorie.id}}</div>
+  <div *ngFor="let question of  quiz?.questions">
+    <div *ngIf="question.categorie === categorie.id">{{question.question}}</div>
   </div>
 </div>

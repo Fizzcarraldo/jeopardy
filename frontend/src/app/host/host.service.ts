@@ -18,7 +18,7 @@ export class HostService {
       query: gql`
         query getGame {
           getGame(gameId: ${gameId})
-            { state id players { name } quiz { id name categories { name questions { question } } } }
+          { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie value } } } 
         }
       `
     })
@@ -28,7 +28,8 @@ export class HostService {
     return this.apollo.subscribe({
       query: gql`
         subscription gameSubscription {
-        gameSubscription(gameId: ${gameId}) { state id players { name } quiz { id name categories { name questions { question } } } }
+        gameSubscription(gameId: ${gameId}) 
+          { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie value } } } 
       }`
     })
   }
@@ -38,6 +39,18 @@ export class HostService {
       mutation: gql`
         mutation hostStartGame {
           hostStartGame(gameId: ${gameId})
+      }`
+    }).subscribe( result => {
+      console.log(result)
+    });
+  }
+
+  public hostSelectQuestion(gameId: number, categorie: string, value: number) {
+    console.log(gameId, categorie, value);
+    this.apollo.mutate({
+      mutation: gql`
+        mutation selectQuestion {
+          selectQuestion(gameId: ${gameId}, categorie: "${categorie}", value: ${value} )
       }`
     }).subscribe( result => {
       console.log(result)

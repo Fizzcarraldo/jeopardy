@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Player } from '../../game.model';
+import { Player } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-player-list',

@@ -12,11 +12,17 @@ export class Game {
   activeQuestion: Question;
   state: State;
   quiz?: Quiz;
+  selectedQuestin?: SelectedQuestion;
 }
 
 export interface Player {
   name: string;
   score: number;
+}
+
+export class SelectedQuestion {
+  categorie: String;
+  value: number;
 }
 
 export class Quiz {

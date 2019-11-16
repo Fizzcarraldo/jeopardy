@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HostService } from '../host.service';
-import { Game, State } from 'src/app/stage/game.model';
+
 import { Subscription } from 'rxjs';
+import { Game, State, SelectedQuestion } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-host-main',
@@ -45,6 +46,10 @@ export class HostMainComponent implements OnInit {
 
   public startGame() {
     this.hostService.hostStartGame(this.gameId);
+  }
+
+  public selectQuestion(selectedQuestion: SelectedQuestion) {
+    this.hostService.hostSelectQuestion(this.gameId, selectedQuestion.categorie, selectedQuestion.value)
   }
 
   ngOnDestroy() { 

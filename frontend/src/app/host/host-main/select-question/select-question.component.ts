@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Quiz } from 'src/app/stage/game.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Quiz, SelectedQuestion } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-select-question',
@@ -8,10 +8,21 @@ import { Quiz } from 'src/app/stage/game.model';
 })
 export class SelectQuestionComponent implements OnInit {
   @Input() quiz: Quiz;
+  @Output() selectQuestion = new EventEmitter<SelectedQuestion>();
+
+  public selectedCategorie: String;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public select(categorie: string, value: number) {
+    const selectedQuestion: SelectedQuestion = {
+      categorie,
+      value
+    }
+    this.selectQuestion.emit(selectedQuestion);
   }
 
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Router } from '@angular/router';
-import { Player } from '../stage/game.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

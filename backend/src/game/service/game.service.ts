@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Game, State, Player, Question } from '../model/game.model';
+import { Game, State, Player, Question, SelectedQuestion } from '../model/game.model';
 import { PubSub } from 'graphql-subscriptions';
 import { BehaviorSubject } from 'rxjs';
 
@@ -31,7 +31,7 @@ export class GameService {
     newGame.subscribe( game => {
       const subscriptionId = 'game-' + gameId;
       pubsub.publish(subscriptionId, {gameSubscription: game});
-      console.log(game);
+      console.log(game.quiz);
     })
     return gameId;
   }
@@ -57,10 +57,29 @@ export class GameService {
     return playerId;
   }
 
-  public changeGameState(gameId: number, state: State): boolean {
+  public startGameState(gameId: number): boolean {
     const game = this.gameMap.get(gameId);
     const update = game.getValue();
-    update.state = state;
+    if (update.state != State.Lobby) {
+      return false
+    }
+    update.state = State.Select;
+    game.next(update);
+    return true;
+  }
+
+  public selectQuestion(gameId: number, categorie: string, value: number): boolean {
+    const game = this.gameMap.get(gameId);
+    const update = game.getValue();
+    if (update.state != State.Select) {
+      return false
+    }
+    const selectedQuestion: SelectedQuestion = {
+      categorie,
+      value
+    }
+    update.state = State.Buzzer;
+    update.selectedQuestion = selectedQuestion;
     game.next(update);
     return true;
   }

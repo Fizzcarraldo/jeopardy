@@ -13,6 +13,7 @@ export class QuizService {
   ) { }
 
 
+  /*
   public getQuiz(gameId): Quiz {
     const game: Game = this.gameService.getGame(gameId).getValue();
     return game.quiz;
@@ -27,6 +28,8 @@ export class QuizService {
     });
   }
 
+
+
   public selectQuestion(gameId, categoryName, questionId): Boolean {
     const game: BehaviorSubject<Game> = this.gameService.getGame(gameId);
     const update = game.getValue();
@@ -35,4 +38,6 @@ export class QuizService {
     game.next(update);
     return true;
   }
+  */  
+
 }

@@ -3,7 +3,6 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Router, } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Game } from './game.model';
 
 
 @Injectable({
@@ -34,7 +33,7 @@ export class StageService {
     return this.apollo.query({
       query: gql`
         query getGame {
-          getGame(gameId: ${gameId}) { state id players { name } quiz { id categories { name questions { question } } } }
+          getGame(gameId: ${gameId}) { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie question value } } } 
         }
       `
     })
@@ -44,7 +43,7 @@ export class StageService {
     return this.apollo.subscribe({
       query: gql`
         subscription gameSubscription {
-        gameSubscription(gameId: ${gameId}) { state id players { name } quiz { id categories { name questions { question } } } }
+        gameSubscription(gameId: ${gameId}) { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie question value } } } 
       }`
     })
   }

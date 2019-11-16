@@ -22,20 +22,25 @@ export interface Player {
 export class Quiz {
   id: number;
   categories: Categorie[];
+  questions: Question[];
 }
 
 export class Categorie {
   name: string;
   displayName: string;
-  questions: Question[];
 }
 
 export class Question {
-  id: number;
+  categorie: String;
   owner: Player;
   status: string;
   value: number;
   question: string;
   image?: string;
   answer: string;
+}
+
+export class SelectedQuestion {
+  categorie: string;
+  value: number;
 }

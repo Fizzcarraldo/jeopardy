@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Game, State } from '../game.model';
 import { StageService } from '../stage.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Game, State } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-stage-main',

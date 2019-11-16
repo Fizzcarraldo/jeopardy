@@ -1,10 +1,14 @@
 <p>select-question works!</p>
-<div>
-  <button *ngFor="let categorie of quiz.categories" class="btn btn-default">
-    {{categorie.name}}
-  </button>
-  <button *ngFor="let categorie of quiz.categories" class="btn btn-default">
-    {{categorie.name}}
+<div *ngIf="!selectedCategorie">
+  <button *ngFor="let categorie of quiz?.categories" (click)="selectedCategorie = categorie.id" class="btn btn-default">
+    {{categorie.id}}
   </button>
 </div>
-
+<div *ngIf="selectedCategorie">
+  {{selectedCategorie}}
+  <ng-container *ngFor="let question of quiz.questions">
+    <button *ngIf="question.categorie === selectedCategorie" (click)="select(selectedCategorie, question.value)" class="btn btn-default">
+      {{question.value}}
+    </button>
+  </ng-container>
+</div>

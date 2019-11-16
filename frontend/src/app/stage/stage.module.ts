@@ -6,6 +6,7 @@ import { StageMainComponent } from './stage-main/stage-main.component';
 import { LobbyComponent } from './stage-main/lobby/lobby.component';
 import { PlayerListComponent } from './stage-main/player-list/player-list.component';
 import { QuizComponent } from './stage-main/quiz/quiz.component';
+import { SelectedQuestionComponent } from './stage-main/selected-question/selected-question.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { QuizComponent } from './stage-main/quiz/quiz.component';
     LobbyComponent,
     StageMainComponent,
     PlayerListComponent,
-    QuizComponent
+    QuizComponent,
+    SelectedQuestionComponent
   ],
   imports: [
     SharedModule,

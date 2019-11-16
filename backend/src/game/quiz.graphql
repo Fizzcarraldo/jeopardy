@@ -2,8 +2,9 @@ type Game {
   id: Int
   players: [Player]
   activePlayer: Int
-  state: String,
+  state: String
   quiz: Quiz
+  selectedQuestion: SelectedQuestion
 }
 
 type Player {
@@ -13,17 +14,22 @@ type Player {
 
 type Quiz {
   id: Int
-  name: String
   categories: [Category]
-}
-
-type Category {
-  name: String
   questions: [Question]
 }
 
+type Category {
+  id: String
+  displayName: String
+}
+
+type SelectedQuestion {
+  categorie: String
+  value: Int
+}
+
 type Question {
-  id: Int
+  categorie: String
   owner: String
   value: Int
   question: String
@@ -45,7 +51,7 @@ type Query {
 type Mutation {
   startNewGame(client: String): Int
   createPlayer(gameId: Int!, name: String): Int
-  selectQuestion(gameId: Int, categoryName: String, questionId: Int): Boolean
+  selectQuestion(gameId: Int, categorie: String, value: Int): Boolean
   pushBuzzer(gameId: Int, playerId: Int): Boolean
   hostStartGame(gameId: Int, playerId: Int): Boolean
   verifyAnswer(isRight: Boolean): Boolean
