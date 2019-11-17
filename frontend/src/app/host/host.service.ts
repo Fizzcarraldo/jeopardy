@@ -19,7 +19,7 @@ export class HostService {
       query: gql`
         query getGame {
           getGame(gameId: ${gameId})
-          { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie value } } } 
+          { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie value owner } } } 
         }
       `
     })
@@ -30,7 +30,7 @@ export class HostService {
       query: gql`
         subscription gameSubscription {
         gameSubscription(gameId: ${gameId}) 
-          { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie value } } } 
+          { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie value owner } } } 
       }`
     })
   }
@@ -63,6 +63,17 @@ export class HostService {
       mutation: gql`
         mutation verifyAnswer {
           verifyAnswer(gameId: ${gameId}, verfication: "${verfication}" )
+      }`
+    }).subscribe( result => {
+      console.log(result)
+    });
+  }
+
+  public skipAnswer(gameId: number) {
+    this.apollo.mutate({
+      mutation: gql`
+        mutation skipAnswer {
+          skipAnswer(gameId: ${gameId})
       }`
     }).subscribe( result => {
       console.log(result)

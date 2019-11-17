@@ -56,6 +56,10 @@ export class HostMainComponent implements OnInit {
     this.hostService.verifyAnswer(this.gameId, verifyOption);
   }
 
+  public skipAnswer() {
+    this.hostService.skipAnswer(this.gameId);
+  }
+
   ngOnDestroy() { 
     if (this.activatedRouteSubscription) {
       this.activatedRouteSubscription.unsubscribe();

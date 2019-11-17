@@ -7,7 +7,7 @@
 <div *ngIf="selectedCategorie">
   {{selectedCategorie}}
   <ng-container *ngFor="let question of quiz.questions">
-    <button *ngIf="question.categorie === selectedCategorie" (click)="select(selectedCategorie, question.value)" class="btn btn-default">
+    <button *ngIf="question.categorie === selectedCategorie && question.owner === null" (click)="select(selectedCategorie, question.value)" class="btn btn-default">
       {{question.value}}
     </button>
   </ng-container>

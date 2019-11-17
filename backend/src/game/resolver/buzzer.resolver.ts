@@ -35,5 +35,5 @@ export class BuzzerResolver {
   ): boolean {
     return this.gameService.pushBuzzer(gameId, playerId);
   }
-  
+
 }

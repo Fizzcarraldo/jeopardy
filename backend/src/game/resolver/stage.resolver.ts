@@ -19,7 +19,6 @@ export class StageResolver {
   getGame(
     @Args('gameId') gameId: number
   ): Game {
-    console.log(this.gameService.getGame(gameId).getValue());
     return this.gameService.getGame(gameId).getValue();
   }
   

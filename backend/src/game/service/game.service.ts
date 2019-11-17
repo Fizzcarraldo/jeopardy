@@ -103,6 +103,25 @@ export class GameService {
     return true;
   }
 
+  private findSlectedQuestion(questions: Question[], selectedQuestion: SelectedQuestion): Question { 
+    return questions.find( question => {
+      return question.value === selectedQuestion.value && question.categorie === selectedQuestion.categorie;
+    });
+  }
+
+  public skipAnswer(gameId: number) {
+    const game: BehaviorSubject<Game> = this.getGame(gameId);
+    const update: Game = game.getValue();
+    if (update.state != State.Buzzer) {
+      return false
+    }
+    const selectedQuestion: SelectedQuestion = update.selectedQuestion;
+    const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
+    question.owner = 0;
+    update.state = State.Select;
+    game.next(update);
+    return true;
+  }
 
   public verifyAnswer(gameId: number, verfication: VerifyOption): Boolean {
     const game: BehaviorSubject<Game> = this.getGame(gameId);
@@ -121,10 +140,8 @@ export class GameService {
       update.state = State.Select;
       activePlayer.score += selectedQuestion.value;
       update.selectedQuestion = null;
-      const findSlectedQuestion: Question = update.quiz.questions.find( question => {
-        return question.value === selectedQuestion.value && question.categorie === selectedQuestion.categorie;
-      })
-      findSlectedQuestion.owner = update.activePlayer;
+      const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
+      question.owner = update.activePlayer;
       update.activePlayer = null;
     }
     game.next(update);

@@ -34,4 +34,11 @@ export class HostResolver {
   ): Boolean {
     return this.gameService.verifyAnswer(gameId, verfication);;
   }
+
+  @Mutation() 
+  skipAnswer(
+    @Args('gameId') gameId: number,
+  ): Boolean {
+    return this.gameService.skipAnswer(gameId);;
+  }
 }

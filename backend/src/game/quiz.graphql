@@ -55,4 +55,5 @@ type Mutation {
   pushBuzzer(gameId: Int, playerId: Int): Boolean
   hostStartGame(gameId: Int, playerId: Int): Boolean
   verifyAnswer(gameId: Int, verfication: String): Boolean
+  skipAnswer(gameId: Int): Boolean
 }
