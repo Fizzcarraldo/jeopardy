@@ -11,7 +11,6 @@ export const pubsub = new PubSub();
 export class GameService {
 
   private gameMap = new Map();
-  private games: BehaviorSubject<Game>[] = [];
 
   public gameSubscription(id: number) {
     const subscriptionId = 'game-' + id;
@@ -21,6 +20,7 @@ export class GameService {
   public startNewGame(client: string): number {
     const gameId = this.getNumberOfGames() + 1;
     const newGame = new BehaviorSubject<Game>({
+      questionsAnswered: 0,
       players: new Map(),
       activePlayer: null,
       state: State.Lobby,
@@ -119,6 +119,10 @@ export class GameService {
     const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
     question.owner = 0;
     update.state = State.Select;
+    update.questionsAnswered ++;
+    if ( this.gameOver(update) ) {
+      update.state = State.GameOver;
+    }
     game.next(update);
     return true;
   }
@@ -137,33 +141,26 @@ export class GameService {
       update.activePlayer = null;
     }
     if (verfication === VerifyOption.Right) {
-      update.state = State.Select;
       activePlayer.score += selectedQuestion.value;
       update.selectedQuestion = null;
       const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
       question.owner = update.activePlayer;
       update.activePlayer = null;
+      update.state = State.Select;
+      update.questionsAnswered ++;
+      if ( this.gameOver(update) ) {
+        update.state = State.GameOver;
+      }
     }
     game.next(update);
     return true;
   }
 
-  /*
-  get Question
-
-  for (let value of foo.keys()) {
-    console.log(value);  
-
+  private gameOver(game: Game): boolean {
+    if ( game.questionsAnswered >= game.quiz.questions.length ) {
+      return true;
+    }
+    return false;
   }
 
-
-  public getAllGames(): Game[] {
-    const games: Game = {id: 1}
-    return [
-    //  games
-    ]
-  }
-
-
-  */
 }

@@ -12,6 +12,7 @@ export enum VerifyOption {
 }
 
 export class Game {
+  questionsAnswered: number;
   players: Map <number, Player>;
   activePlayer: number;
   state: State;
