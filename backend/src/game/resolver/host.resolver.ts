@@ -1,7 +1,7 @@
 import { Args, Query, Resolver, Mutation } from '@nestjs/graphql';
 import { QuizService } from '../service/quiz.service';
 import { GameService } from '../service/game.service';
-import { State, SelectedQuestion } from '../model/game.model';
+import { State, SelectedQuestion, VerifyOption } from '../model/game.model';
 
 @Resolver('Host')
 export class HostResolver {
@@ -27,15 +27,11 @@ export class HostResolver {
     return this.gameService.selectQuestion(gameId, categorie, value);;
   }
 
-    /*
-
   @Mutation() 
   verifyAnswer(
     @Args('gameId') gameId: number,
-    @Args('categoryName') categoryName: string,
-    @Args('questionId') questionId: number,
+    @Args('verfication') verfication: VerifyOption
   ): Boolean {
-    return this.gameService.verifyAnswer(gameId);
+    return this.gameService.verifyAnswer(gameId, verfication);;
   }
-*/
 }

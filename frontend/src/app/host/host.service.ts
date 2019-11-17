@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import gql from 'graphql-tag';
+import { VerifyOption } from '../shared/game.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,17 @@ export class HostService {
       mutation: gql`
         mutation selectQuestion {
           selectQuestion(gameId: ${gameId}, categorie: "${categorie}", value: ${value} )
+      }`
+    }).subscribe( result => {
+      console.log(result)
+    });
+  }
+
+  public verifyAnswer(gameId: number, verfication: VerifyOption) {
+    this.apollo.mutate({
+      mutation: gql`
+        mutation verifyAnswer {
+          verifyAnswer(gameId: ${gameId}, verfication: "${verfication}" )
       }`
     }).subscribe( result => {
       console.log(result)

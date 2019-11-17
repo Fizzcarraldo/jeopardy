@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { HostService } from '../host.service';
 
 import { Subscription } from 'rxjs';
-import { Game, State, SelectedQuestion } from 'src/app/shared/game.model';
+import { Game, State, SelectedQuestion, VerifyOption } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-host-main',
@@ -50,6 +50,10 @@ export class HostMainComponent implements OnInit {
 
   public selectQuestion(selectedQuestion: SelectedQuestion) {
     this.hostService.hostSelectQuestion(this.gameId, selectedQuestion.categorie, selectedQuestion.value)
+  }
+
+  public verifyAnswer(verifyOption: VerifyOption) {
+    this.hostService.verifyAnswer(this.gameId, verifyOption);
   }
 
   ngOnDestroy() { 

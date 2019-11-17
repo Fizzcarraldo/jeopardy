@@ -6,6 +6,11 @@ export enum State {
   GameOver = "GameOver",
 }
 
+export enum VerifyOption {
+  Right = "Right",
+  Wrong = "Wrong",
+}
+
 export class Game {
   players: Map <number, Player>;
   activePlayer: Player;
@@ -26,13 +31,13 @@ export class Quiz {
 }
 
 export class Categorie {
-  name: string;
+  id: string;
   displayName: string;
 }
 
 export class Question {
   categorie: String;
-  owner: Player;
+  owner: number;
   status: string;
   value: number;
   question: string;

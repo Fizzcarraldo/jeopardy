@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Game, State, Player, Question, SelectedQuestion } from '../model/game.model';
+import { Game, State, Player, Question, SelectedQuestion, VerifyOption } from '../model/game.model';
 import { PubSub } from 'graphql-subscriptions';
 import { BehaviorSubject } from 'rxjs';
 
@@ -23,7 +23,6 @@ export class GameService {
     const newGame = new BehaviorSubject<Game>({
       players: new Map(),
       activePlayer: null,
-      activeQuestion: null,
       state: State.Lobby,
       quiz
     });
@@ -31,7 +30,6 @@ export class GameService {
     newGame.subscribe( game => {
       const subscriptionId = 'game-' + gameId;
       pubsub.publish(subscriptionId, {gameSubscription: game});
-      console.log(game.quiz);
     })
     return gameId;
   }
@@ -52,6 +50,9 @@ export class GameService {
     const playerId = this.getNumberOfPlayers(gameId) + 1;
     const game = this.gameMap.get(gameId);
     const update = game.getValue();
+    if (update.state != State.Lobby) {
+      return 0;
+    }
     update.players.set(playerId, player);
     game.next(update);
     return playerId;
@@ -90,6 +91,46 @@ export class GameService {
     return player;
   }
 
+  public pushBuzzer(gameId: number, playerId: number) {
+    const game = this.gameMap.get(gameId);
+    const update = game.getValue();
+    if (update.state != State.Buzzer) {
+      return false
+    }
+    update.activePlayer = playerId;
+    update.state = State.Answer;
+    game.next(update);
+    return true;
+  }
+
+
+  public verifyAnswer(gameId: number, verfication: VerifyOption): Boolean {
+    const game: BehaviorSubject<Game> = this.getGame(gameId);
+    const update: Game = game.getValue();
+    const activePlayer: Player = update.players.get(update.activePlayer);
+    const selectedQuestion: SelectedQuestion = update.selectedQuestion;
+    if (update.state != State.Answer) {
+      return false
+    }
+    if (verfication === VerifyOption.Wrong) {
+      update.state = State.Buzzer;
+      activePlayer.score -= selectedQuestion.value;
+      update.activePlayer = null;
+    }
+    if (verfication === VerifyOption.Right) {
+      update.state = State.Select;
+      activePlayer.score += selectedQuestion.value;
+      update.selectedQuestion = null;
+      const findSlectedQuestion: Question = update.quiz.questions.find( question => {
+        return question.value === selectedQuestion.value && question.categorie === selectedQuestion.categorie;
+      })
+      findSlectedQuestion.owner = update.activePlayer;
+      update.activePlayer = null;
+    }
+    game.next(update);
+    return true;
+  }
+
   /*
   get Question
 
@@ -106,18 +147,6 @@ export class GameService {
     ]
   }
 
-  public verifyAnswer(gameId: number): Boolean {
-    const game: BehaviorSubject<Game> = this.getGame(gameId);
-    const update: Game = game.getValue();
-    const activePlayer: Player = update.activePlayer;
-    const activeQuestion: Question = update.activeQuestion;
-    activeQuestion.owner = update.activePlayer;
-    activePlayer.score = ++activeQuestion.value;
-    update.activePlayer = null;
-    update.activeQuestion = null;
-    update.state = State.Select;
-    game.next(update);
-    return true;
-  }
+
   */
 }

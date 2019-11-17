@@ -22,6 +22,10 @@ export class BuzzerService {
         }
       `
     }).subscribe( result  => {
+      console.log(result.data['createPlayer'])
+      if (!result.data['createPlayer']) {
+        this.router.navigate(['buzzer/error']);
+      }
       this.router.navigate([`buzzer/main/${gameId}/${result.data['createPlayer']}`]);
     }, error => {
       this.router.navigate(['buzzer/error']);

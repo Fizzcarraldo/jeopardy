@@ -6,13 +6,17 @@ export enum State {
   GameOver = "GameOver",
 }
 
+export enum VerifyOption {
+  Right = "Right",
+  Wrong = "Wrong",
+}
+
 export class Game {
   players: Map <number, Player>;
-  activePlayer: Player;
-  activeQuestion: Question;
+  activePlayer: number;
   state: State;
   quiz?: Quiz;
-  selectedQuestin?: SelectedQuestion;
+  selectedQuestion?: SelectedQuestion;
 }
 
 export interface Player {
@@ -28,18 +32,18 @@ export class SelectedQuestion {
 export class Quiz {
   id: number;
   categories: Categorie[];
+  questions: Question[];
 }
 
 export class Categorie {
-  name: string;
+  id: string;
   displayName: string;
-  questions: Question[];
 }
 
 export class Question {
   id: number;
-  owner: Player;
-  status: string;
+  categorie: string;
+  owner: number;
   value: number;
   question: string;
   image?: string;
