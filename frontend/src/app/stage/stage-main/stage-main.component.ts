@@ -35,10 +35,7 @@ export class StageMainComponent implements OnInit, OnDestroy {
         this.game = init.data.getGame;
         console.log(this.game)
       });
-      this.stageService.gameSubscription(this.gameId).subscribe( update => {
-        this.game = update.data.gameSubscription;
-        console.log(this.game)
-      });
+
     });
   }
 

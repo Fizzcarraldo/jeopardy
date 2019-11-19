@@ -19,12 +19,12 @@ export class StageService {
     this.apollo.mutate({
       mutation: gql`
         mutation startNewGame {
-          startNewGame(client: "flo") 
+          startNewGame(client: "flo")
         }
       `
     }).subscribe( newGame => {
       console.log('new game')
-      const gameId = newGame.data['startNewGame']; 
+      const gameId = newGame.data['startNewGame'];
       this.router.navigate(['stage/' + gameId])
     });
   }
@@ -33,18 +33,20 @@ export class StageService {
     return this.apollo.query({
       query: gql`
         query getGame {
-          getGame(gameId: ${gameId}) { state id selectedQuestion { categorie value} players { name score } quiz { id categories { id displayName } questions { categorie question value owner } } } 
+          getGame(gameId: ${gameId}) { state id selectedQuestion { categorie value} players { name score } quiz { id categories { id displayName } questions { categorie question value owner } } }
         }
       `
     })
   }
 
+  /*
   public gameSubscription(gameId: number): Observable<any> {
     return this.apollo.subscribe({
       query: gql`
         subscription gameSubscription {
-        gameSubscription(gameId: ${gameId}) { state id selectedQuestion { categorie value} players { name score } quiz { id categories { id displayName } questions { categorie question value owner } } } 
+        gameSubscription(gameId: ${gameId}) { state id selectedQuestion { categorie value} players { name score } quiz { id categories { id displayName } questions { categorie question value owner } } }
       }`
     })
   }
+  */
 }
