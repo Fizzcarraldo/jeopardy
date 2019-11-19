@@ -23,7 +23,8 @@ export class HostMainComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(resolverData => {
-      if (!resolverData.data) {
+      console.log(resolverData);
+      if (!resolverData.game.data.getGame) {
         this.router.navigate(['index']);
       }
       this.game = resolverData.game.data.getGame;

@@ -1,3 +1,5 @@
+import { NumberSymbol } from '@angular/common';
+
 export enum State {
   Lobby = "Lobby",
   Select = "Select",
@@ -17,6 +19,13 @@ export class Game {
   activeQuestion: Question;
   state: State;
   quiz?: Quiz;
+}
+
+export class Buzzer {
+  playerId: number;
+  gameId: number;
+  player: Player;
+  state: State;
 }
 
 export interface Player {

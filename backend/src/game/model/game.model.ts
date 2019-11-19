@@ -20,6 +20,13 @@ export class Game {
   selectedQuestion?: SelectedQuestion;
 }
 
+export class Buzzer {
+  playerId: number;
+  gameId: number;
+  state: State;
+  player: Player;
+}
+
 export interface Player {
   name: string;
   score: number;

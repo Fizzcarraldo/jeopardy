@@ -28,7 +28,7 @@ export class GameService {
     return this.apollo.subscribe({
       query: gql`
         subscription gameSubscription {
-        gameSubscription(gameId: ${gameId}) {}
+        gameSubscription(gameId: ${gameId})
       }`
     });
   }

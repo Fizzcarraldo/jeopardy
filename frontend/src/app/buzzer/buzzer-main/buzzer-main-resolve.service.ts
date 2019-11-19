@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { BuzzerService } from '../buzzer.service';
 import { GameService } from 'src/app/shared/game.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HostMainResolveService implements Resolve<Observable<any>> {
+export class BuzzerMainResolveService {
   subscription: Subscription;
   constructor(
     private gameService: GameService,
+    private buzzerService: BuzzerService,
     private router: Router
-  ) {  }
+  ) { }
 
   reload(): void {
     const tree: UrlTree = this.router.parseUrl(this.router.url);
@@ -23,9 +25,13 @@ export class HostMainResolveService implements Resolve<Observable<any>> {
     state: RouterStateSnapshot
   ): Observable<any> {
     const gameId: string = route.paramMap.get('gameId');
+    const playerId: string = route.paramMap.get('playerId');
+    console.log(gameId);
+    console.log(playerId);
+    
     this.gameService.subscribeGame(+gameId).subscribe( update => {
       this.reload();
     });
-    return this.gameService.getGame(+gameId);
+    return this.buzzerService.getBuzzer(+gameId, +playerId);
   }
 }

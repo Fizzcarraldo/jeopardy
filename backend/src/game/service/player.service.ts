@@ -16,10 +16,6 @@ export class PlayerService {
     return this.gameService.addNewPlayer(gameId, newPlayer);;
   }
 
-  public getPlayer(gameId: number, playerId: number) {
-    return this.gameService.getPlayer(gameId, playerId);
-  }
-
   /*
   public updateActivePlayer(gameId: number, playerId: number): Player {
     const game: BehaviorSubject<Game> = this.gameService.getGame(gameId);

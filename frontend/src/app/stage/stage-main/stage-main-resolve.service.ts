@@ -6,12 +6,12 @@ import { GameService } from 'src/app/shared/game.service';
 @Injectable({
   providedIn: 'root'
 })
-export class HostMainResolveService implements Resolve<Observable<any>> {
+export class StageMainResolveService {
   subscription: Subscription;
   constructor(
     private gameService: GameService,
     private router: Router
-  ) {  }
+  ) { }
 
   reload(): void {
     const tree: UrlTree = this.router.parseUrl(this.router.url);

@@ -7,6 +7,13 @@ type Game {
   selectedQuestion: SelectedQuestion
 }
 
+type Buzzer {
+  gameId: Int
+  playerId: Int
+  player: Player
+  state: String
+}
+
 type Player {
   name: String
   score: Int
@@ -45,7 +52,7 @@ type Query {
   getAllGames(id: Int): [Game]
   getGame(gameId: Int!): Game
   getQuiz(gameId: Int!): Quiz
-  getPlayer(gameId: Int!, playerId: Int!): Player
+  getBuzzer(gameId: Int!, playerId: Int!): Buzzer
 }
 
 type Mutation {

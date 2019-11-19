@@ -26,17 +26,14 @@ export class StageMainComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.gameId = params.gameId;
-      this.stageService.initGame(this.gameId).subscribe( init => {
-        if (!init.data.getGame) {
-          this.router.navigate(['index'])
-        }
-        this.game = init.data.getGame;
-        console.log(this.game)
-      });
-
+    this.activatedRoute.data.subscribe(resolverData => {
+      if (!resolverData.game.data.getGame) {
+        this.router.navigate(['index']);
+      }
+      console.log(resolverData);
+      this.game = resolverData.game.data.getGame;
     });
+    this.gameId = +this.activatedRoute.snapshot.paramMap.get('gameId');
   }
 
   ngOnDestroy() {

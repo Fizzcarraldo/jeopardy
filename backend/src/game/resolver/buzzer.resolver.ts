@@ -1,5 +1,5 @@
 import { Args, Resolver, Mutation, Query } from '@nestjs/graphql';
-import { Player, State, Game } from '../model/game.model';
+import { Player, State, Game, Buzzer } from '../model/game.model';
 import { PlayerService } from '../service/player.service';
 import { GameService } from '../service/game.service';
 
@@ -21,11 +21,11 @@ export class BuzzerResolver {
   }
 
   @Query()
-  getPlayer(
+  getBuzzer(
     @Args('gameId') gameId: number,
     @Args('playerId') playerId: number
-  ): Player {
-    return this.playerService.getPlayer(gameId, playerId);
+  ): Buzzer {
+    return this.gameService.getBuzzer(gameId, playerId);
   }
 
   @Mutation()

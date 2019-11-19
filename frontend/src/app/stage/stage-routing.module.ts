@@ -2,10 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 import { StageMainComponent } from './stage-main/stage-main.component';
+import { StageMainResolveService } from './stage-main/stage-main-resolve.service';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent },
-  { path: 'stage/:gameId', component: StageMainComponent },
+  { path: 'stage/:gameId', 
+    component: StageMainComponent,
+    resolve: {
+      game: StageMainResolveService
+    },
+    runGuardsAndResolvers: "always"
+  },
 ];
 
 @NgModule({

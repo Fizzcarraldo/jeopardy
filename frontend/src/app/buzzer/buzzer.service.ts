@@ -32,25 +32,30 @@ export class BuzzerService {
     });
   }
 
-  public getPlayer(gameId: number, playerId: number): Observable<any> {
+  public getBuzzer(gameId: number, playerId: number): Observable<any> {
     return this.apollo.query({
       query: gql`
-        query getPlayer {
-          getPlayer(gameId: ${gameId}, playerId: ${playerId}) {
-            name
+        query getBuzzer{
+          getBuzzer(gameId: ${gameId}, playerId: ${playerId}) {
+            gameId playerId state player { name }
           }
         }
       `
     })
   }
 
-  public pushBuzzer(gameId: number, playerId: number): Observable<any> {
-    return this.apollo.mutate({
+  public pushBuzzer(gameId: number, playerId: number): void {
+    this.apollo.mutate({
       mutation: gql`
         mutation pushBuzzer {
           pushBuzzer(gameId: ${gameId}, playerId: ${playerId})
         }
       `
-    })
+    }).subscribe(
+      result => { 
+        console.log(result);
+      }
+    )
+
   }
 }
