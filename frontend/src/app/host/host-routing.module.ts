@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HostMainComponent } from './host-main/host-main.component';
+import { HostMainResolveService } from './host-main/host-main-resolve.service';
 
 const routes: Routes = [
-  { path: 'host/:gameId', component: HostMainComponent }
+  {
+    path: 'host/:gameId',
+    component: HostMainComponent,
+    resolve: {
+      game: HostMainResolveService
+    },
+    runGuardsAndResolvers: "always"
+  }
 ];
 
 @NgModule({

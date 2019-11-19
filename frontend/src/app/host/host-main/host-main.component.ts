@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params, UrlTree } from '@angular/router';
 import { HostService } from '../host.service';
 
 import { Subscription } from 'rxjs';
@@ -26,22 +26,38 @@ export class HostMainComponent implements OnInit {
     private router: Router
   ) { }
 
+
+  reload(): void {
+    const tree: UrlTree = this.router.parseUrl(this.router.url);
+    this.router.navigateByUrl(this.router.serializeUrl(tree));
+    console.log("realoded")
+  }
+
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.gameId = params.gameId;
-      this.hostService.initHost(this.gameId).subscribe( init => {
-        if (!init.data) {
-          this.router.navigate(['index'])
-        }
-        console.log(init)
-        this.game = init.data.getGame;
-        console.log(this.game)
-      }); 
-      this.hostService.hostSubscription(this.gameId).subscribe( update => {
-        this.game = update.data.gameSubscription;
-        console.log(this.game)
-      });
+    this.activatedRoute.data.subscribe(d => {
+      console.log(d.game);
     });
+
+    const gameId: string = this.activatedRoute.snapshot.paramMap.get('gameId');
+
+    this.hostService.hostSubscription(+gameId).subscribe( update => {
+      console.log("reload")
+      this.reload();
+    });
+
+
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   this.gameId = params.gameId;
+    //   this.hostService.initHost(this.gameId).subscribe( init => {
+    //     if (!init.data) {
+    //       this.router.navigate(['index'])
+    //     }
+    //     console.log(init)
+    //     this.game = init.data.getGame;
+    //     console.log(this.game)
+    //   });
+
+    // });
   }
 
   public startGame() {
@@ -60,7 +76,7 @@ export class HostMainComponent implements OnInit {
     this.hostService.skipAnswer(this.gameId);
   }
 
-  ngOnDestroy() { 
+  ngOnDestroy() {
     if (this.activatedRouteSubscription) {
       this.activatedRouteSubscription.unsubscribe();
     }

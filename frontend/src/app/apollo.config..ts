@@ -26,7 +26,7 @@ export class GraphQLModule {
     });
 
     const ws = new WebSocketLink({
-      uri: `ws://localhost:3000/graphql`,
+      uri: 'ws://localhost:3000/graphql',
       options: {
         reconnect: true
       }
