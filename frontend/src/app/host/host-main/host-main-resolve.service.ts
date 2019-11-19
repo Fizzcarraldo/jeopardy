@@ -14,12 +14,22 @@ export class HostMainResolveService implements Resolve<Observable<any>> {
   ) {
   }
 
+  reload(): void {
+    const tree: UrlTree = this.router.parseUrl(this.router.url);
+    this.router.navigateByUrl(this.router.serializeUrl(tree));
+    console.log("realoded")
+  }
+
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
     const gameId: string = route.paramMap.get('gameId');
-    console.log("rerun resovler")
+    this.hostService.hostSubscription(+gameId).subscribe( update => {
+      console.log("reload")
+      this.reload();
+    });
     return this.hostService.initHost(+gameId);
   }
 }

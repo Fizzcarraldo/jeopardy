@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router, Params, UrlTree } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HostService } from '../host.service';
 
-import { Subscription } from 'rxjs';
 import { Game, State, SelectedQuestion, VerifyOption } from 'src/app/shared/game.model';
 
 @Component({
@@ -16,48 +15,20 @@ export class HostMainComponent implements OnInit {
   public game: Game;
   public gameState: typeof State =  State;
 
-  private activatedRouteSubscription: Subscription;
-  private initHostSubscription: Subscription;
-  private hostSubscription: Subscription;
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private hostService: HostService,
     private router: Router
   ) { }
 
-
-  reload(): void {
-    const tree: UrlTree = this.router.parseUrl(this.router.url);
-    this.router.navigateByUrl(this.router.serializeUrl(tree));
-    console.log("realoded")
-  }
-
   ngOnInit() {
-    this.activatedRoute.data.subscribe(d => {
-      console.log(d.game);
+    this.activatedRoute.data.subscribe(resolverData => {
+      if (!resolverData.data) {
+        this.router.navigate(['index']);
+      }
+      this.game = resolverData.game.data.getGame;
     });
-
-    const gameId: string = this.activatedRoute.snapshot.paramMap.get('gameId');
-
-    this.hostService.hostSubscription(+gameId).subscribe( update => {
-      console.log("reload")
-      this.reload();
-    });
-
-
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   this.gameId = params.gameId;
-    //   this.hostService.initHost(this.gameId).subscribe( init => {
-    //     if (!init.data) {
-    //       this.router.navigate(['index'])
-    //     }
-    //     console.log(init)
-    //     this.game = init.data.getGame;
-    //     console.log(this.game)
-    //   });
-
-    // });
+    this.gameId = +this.activatedRoute.snapshot.paramMap.get('gameId');
   }
 
   public startGame() {
@@ -75,17 +46,4 @@ export class HostMainComponent implements OnInit {
   public skipAnswer() {
     this.hostService.skipAnswer(this.gameId);
   }
-
-  ngOnDestroy() {
-    if (this.activatedRouteSubscription) {
-      this.activatedRouteSubscription.unsubscribe();
-    }
-    if (this.initHostSubscription) {
-      this.initHostSubscription.unsubscribe();
-    }
-    if (this.hostSubscription) {
-      this.hostSubscription.unsubscribe();
-    }
-  }
-
 }
