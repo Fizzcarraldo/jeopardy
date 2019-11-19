@@ -38,7 +38,7 @@ type Question {
 }
 
 type Subscription {
-  gameSubscription(gameId: Int!): Game
+  gameSubscription(gameId: Int!): String
 }
 
 type Query { 

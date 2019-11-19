@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { HostService } from '../host.service';
+import { GameService } from 'src/app/shared/game.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { HostService } from '../host.service';
 export class HostMainResolveService implements Resolve<Observable<any>> {
   subscription: Subscription;
   constructor(
-    private hostService: HostService,
+    private gameService: GameService,
     private router: Router
   ) {
   }
@@ -17,19 +17,16 @@ export class HostMainResolveService implements Resolve<Observable<any>> {
   reload(): void {
     const tree: UrlTree = this.router.parseUrl(this.router.url);
     this.router.navigateByUrl(this.router.serializeUrl(tree));
-    console.log("realoded")
   }
-
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
     const gameId: string = route.paramMap.get('gameId');
-    this.hostService.hostSubscription(+gameId).subscribe( update => {
-      console.log("reload")
+    this.gameService.subscribeGame(+gameId).subscribe( update => {
       this.reload();
     });
-    return this.hostService.initHost(+gameId);
+    return this.gameService.getGame(+gameId);
   }
 }

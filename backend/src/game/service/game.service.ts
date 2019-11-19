@@ -29,7 +29,7 @@ export class GameService {
     this.gameMap.set(gameId, newGame);
     newGame.subscribe( game => {
       const subscriptionId = 'game-' + gameId;
-      pubsub.publish(subscriptionId, {gameSubscription: game});
+      pubsub.publish(subscriptionId, 'update');
     })
     return gameId;
   }
