@@ -7,3 +7,17 @@
 @import "tailwindcss/utilities";
 
 //@import "./styles/utilities.scss";
+
+@import "./app/shared/styles/shared.scss";
+@import "./app/shared/styles/variables.scss";
+
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body, #root {
+   height: 100%;
+   display: block;
+   margin: 0;
+   padding: 0;
+  }
