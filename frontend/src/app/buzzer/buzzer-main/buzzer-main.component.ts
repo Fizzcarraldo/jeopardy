@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BuzzerService } from '../buzzer.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Player, Buzzer } from 'src/app/shared/game.model';
   templateUrl: './buzzer-main.component.html',
   styleUrls: ['./buzzer-main.component.scss']
 })
-export class BuzzerMainComponent implements OnInit, OnDestroy {
+export class BuzzerMainComponent implements OnInit {
 
   public buzzer: Buzzer;
 
