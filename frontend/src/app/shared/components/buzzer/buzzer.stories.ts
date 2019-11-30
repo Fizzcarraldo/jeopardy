@@ -14,15 +14,6 @@ export const defaultBuzzer = () => ({
   props: {
     onClick: action('Buuzer was clicked')
   }
-
-});
-
-export const withSomeEmojiAndAction = () => ({
-  component: BuzzerComponent,
-  props: {
-    price: number('price', 2.25),
-    onClick: action('This was clicked OMG'),
-  },
 });
 
 export const disabledBuzzer = () => ({
@@ -30,5 +21,4 @@ export const disabledBuzzer = () => ({
   props: {
     disabled: true,
   },
-
 });

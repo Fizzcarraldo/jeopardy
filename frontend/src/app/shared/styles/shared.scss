@@ -2,9 +2,21 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html, body, #root, .app {
   height: 100%;
   display: block;
   margin: 0;
   padding: 0;
+}
+
+.h-30p {
+  height: 30%;
+}
+
+.max-h-xs {
+  height: 10rem;
+}
+
+.pb-full {
+  padding-bottom: 100%;
 }

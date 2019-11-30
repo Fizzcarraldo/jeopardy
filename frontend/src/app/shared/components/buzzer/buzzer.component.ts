@@ -9,8 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class BuzzerComponent implements OnInit {
 
   @Input() disabled: boolean;
-  @Input() price: number;
-  @Output() public onClick = new EventEmitter<string>();
+  @Output() public onClick = new EventEmitter();
 
   constructor() { }
 

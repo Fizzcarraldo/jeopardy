@@ -1,12 +1,9 @@
-<!--div [class.development]="development" ed class=" w-full h-full">
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    Button
-  </button>
+<div [class.development]="development" ed class="w-full h-full p-4 flex flex-col">
+  <div class="header w-full h-4 mb-4 h-30p" >
+    <ng-content select="[header]"></ng-content>
+  </div>
+  <div class="body w-full h-4 flex-1 " >
+    <ng-content class="flex" select="[body]"></ng-content>
+  </div>
+</div>
 
-     
-
-</div-->
-
-<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-10">
-        Button
-      </button>

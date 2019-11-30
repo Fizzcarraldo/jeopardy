@@ -1,3 +1,4 @@
-<div>
-    <button [disabled]="disabled" (click)="onClick.emit('Buzz')">Buzzer {{price}}</button>  
+<div class="w-full max-w-xs">
+  <button [disabled]="disabled" [class.disabled]="disabled" 
+    class="responsive-square rounded-full w-full pb-full " (click)="onClick.emit()"></button>  
 </div>

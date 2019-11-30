@@ -1,4 +1,8 @@
-<p>buzzer-main works!</p>
-{{player?.name}}
-<button class="btn btn-default" (click)="pushBuzzer()">push Buzzer</button>
-<app-buzzer-layout></app-buzzer-layout>
+<app-buzzer-layout>
+  <div header class="w-full h-full">
+    <app-buzzer-header [name]="player?.name" [score]="0" [playerColor]="'blue'"></app-buzzer-header>
+  </div>
+  <div body class="w-full h-full" >
+    <app-buzzer (onClick)="pushBuzzer()"></app-buzzer>
+  </div>
+</app-buzzer-layout>
