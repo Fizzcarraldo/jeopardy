@@ -1,13 +1,13 @@
-import { BuzzerLayoutComponent } from './buzzer-layout.component';
 import { withKnobs, boolean  } from '@storybook/addon-knobs';
+import { StageLayoutComponent } from './stage-layout.component';
 
 export default { 
-  title: 'BuzzerLayout',
+  title: 'StageLayout',
   decorators: [withKnobs]
 }
 
 export const defaultBuzzerLayout = () => ({
-  component: BuzzerLayoutComponent,
+  component: StageLayoutComponent,
   props: {
     gridVisible: boolean('Show grid', true)
   },

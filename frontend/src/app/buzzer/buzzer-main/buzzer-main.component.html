@@ -1,8 +1,4 @@
 <app-buzzer-layout>
-  <div header class="w-full h-full">
-    <app-buzzer-header [name]="player?.name" [score]="0" [playerColor]="'blue'"></app-buzzer-header>
-  </div>
-  <div body class="w-full h-full" >
-    <app-buzzer (onClick)="pushBuzzer()"></app-buzzer>
-  </div>
+  <app-buzzer-header header [name]="player?.name" [score]="0" [playerColor]="'blue'"></app-buzzer-header>
+  <app-buzzer body (onClick)="pushBuzzer()"></app-buzzer>
 </app-buzzer-layout>

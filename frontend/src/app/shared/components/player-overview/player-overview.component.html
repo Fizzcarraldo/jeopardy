@@ -1,0 +1,5 @@
+<div class="container bg-red-200 h-full px-4">
+  <div class="bg-red-300 h-full w-full flex justify-around">
+    <div *ngFor="let player of players" class="flex-1 bg-red-400 mx-4 max-w-xs"> {{ player.name }} {{ player.score }}</div>
+  </div>
+</div>
