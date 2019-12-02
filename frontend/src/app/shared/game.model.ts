@@ -31,6 +31,7 @@ export class Buzzer {
 export interface Player {
   name: string;
   score: number;
+  color: string;
 }
 
 export class Quiz {

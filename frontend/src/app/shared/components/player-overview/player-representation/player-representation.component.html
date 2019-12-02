@@ -1,0 +1,18 @@
+
+<div class="w-full h-full flex flex-col">
+  <div class="flex-1 w-full flex items-end">
+    <div class="w-full bar flex items-center justify-center relative" [style.height.%]="getHeight()" [style.background-color]="color"> 
+      <div class="flex flex-col items-center mt-8 absolute text-white lg:font-bold">
+        <div class="text-xs lg:text-lg">{{ name }}</div>
+        <div>{{ score }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="h-16 w-full" [style.background-color]="color"></div> 
+</div>
+
+
+
+
+
+

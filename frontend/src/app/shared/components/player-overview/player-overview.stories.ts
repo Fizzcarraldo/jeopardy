@@ -1,44 +1,48 @@
-import { withKnobs, text, number, color, select } from '@storybook/addon-knobs';
+import { withKnobs, text, number, color, select, object } from '@storybook/addon-knobs';
 import { PlayerOverviewComponent } from './player-overview.component';
-import { Player } from '../../game.model';
+import { PlayerRepresentationComponent } from './player-representation/player-representation.component';
+import {  moduleMetadata } from '@storybook/angular';
 
 export default { 
   title: 'PlayerOverview',
-  decorators: [withKnobs]
+  decorators: [
+    withKnobs, 
+    moduleMetadata({ declarations: [PlayerRepresentationComponent] }) 
+  ]
 }
 
 const options = {
   Zero: [],
-  One: [{name: 'flo', score: 0}],
+  One: [{name: 'flo', score: 0, color: '#E59726'}],
   Two: [
-    {name: 'flo', score: 0},
-    {name: 'michi', score: 0}
+    {name: 'flo', score: 0, color: '#E59726'},
+    {name: 'michi', score: 0, color: '#006B60'}
   ],
   Three: [
-    {name: 'flo', score: 0},
-    {name: 'michi', score: 0},
-    {name: 'Tim', score: 0},
+    {name: 'flo', score: 0, color: '#E59726'},
+    {name: 'michi', score: 0, color: '#006B60'},
+    {name: 'Tim', score: 0, color: '#9A2511' },
   ],
   Four: [
-    {name: 'flo', score: 0},
-    {name: 'michi', score: 0},
-    {name: 'Tim', score: 0},
-    {name: 'Dommi', score: 0},
+    {name: 'flo', score: 0, color: '#E59726'},
+    {name: 'michi', score: 0, color: '#006B60'},
+    {name: 'Tim', score: 0, color: '#9A2511'},
+    {name: 'Dommi', score: 0, color: '#0065BD'},
   ],
   Five: [
-    {name: 'flo', score: 0},
-    {name: 'michi', score: 0},
-    {name: 'Tim', score: 0},
-    {name: 'Dommi', score: 0},
-    {name: 'Edi', score: 0},
+    {name: 'flo', score: 0, color: '#E59726'},
+    {name: 'michi', score: 0, color: '#006B60'},
+    {name: 'Tim', score: 0, color: '#9A2511'},
+    {name: 'Dommi', score: 0, color: '#0065BD'},
+    {name: 'Edi', score: 0, color: '#78961F'},
   ]
 }
 
 export const NumberOfPlayers = () => ({
   component: PlayerOverviewComponent,
   props: {
-    //players:  [{name: 'flo', score: 0}],
-    players: select('Number of Players', options, [{name: 'flo', score: 0}])
+
+    players: select('Number of Players', options, [{name: 'flo', score: 0, color:  '#E59726'}])
   },
 });
 
@@ -46,10 +50,11 @@ export const ChangeScore = () => ({
   component: PlayerOverviewComponent,
   props: {
     players: [
-      {name: 'flo', score: number('Score Player 1', 0)},
-      {name: 'michi', score: number('Score Player 2', 0)},
-      {name: 'tim', score: number('Score Player 3', 0)},
-      {name: 'dommi', score: number('Score Player 4', 0)}
+      {name: 'flo', score: number('Score Player 1', 0), color: '#E59726'},
+      {name: 'michi', score: number('Score Player 2', 0), color: '#006B60'},
+      {name: 'Tim', score: number('Score Player 3', 0), color: '#9A2511'},
+      {name: 'Dommi', score: number('Score Player 4', 0), color: '#0065BD'},
+      {name: 'Edi', score: number('Score Player 5', 0), color: '#78961F'},
     ]
   },
 });

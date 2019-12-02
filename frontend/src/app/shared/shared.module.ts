@@ -5,6 +5,7 @@ import { BuzzerComponent } from './components/buzzer/buzzer.component';
 import { BuzzerHeaderComponent } from './components/buzzer-header/buzzer-header.component';
 import { StageLayoutComponent } from './layouts/stage-layout/stage-layout.component';
 import { PlayerOverviewComponent } from './components/player-overview/player-overview.component';
+import { PlayerRepresentationComponent } from './components/player-overview/player-representation/player-representation.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { PlayerOverviewComponent } from './components/player-overview/player-ove
     BuzzerHeaderComponent,
     BuzzerLayoutComponent,
     StageLayoutComponent,
-    PlayerOverviewComponent
+    PlayerOverviewComponent,
+    PlayerRepresentationComponent
   ],
   imports: [
     CommonModule,

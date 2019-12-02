@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Player } from '../../game.model';
 
 @Component({
@@ -6,13 +6,19 @@ import { Player } from '../../game.model';
   templateUrl: './player-overview.component.html',
   styleUrls: ['./player-overview.component.scss']
 })
-export class PlayerOverviewComponent implements OnInit {
+export class PlayerOverviewComponent {
   @Input() public players: Player[];
-  @Input() public score: number;
 
   constructor() { }
 
-  ngOnInit() {
+  public getTotalScore() {
+    let totalScore = 0;
+    this.players.forEach(player => {
+      if (player.score >= 0) {
+        totalScore += player.score;
+      }
+    });
+    return totalScore;
   }
 
 }

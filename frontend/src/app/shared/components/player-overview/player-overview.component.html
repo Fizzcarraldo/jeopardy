@@ -1,5 +1,10 @@
-<div class="container bg-red-200 h-full px-4">
-  <div class="bg-red-300 h-full w-full flex justify-around">
-    <div *ngFor="let player of players" class="flex-1 bg-red-400 mx-4 max-w-xs"> {{ player.name }} {{ player.score }}</div>
+<div class="container h-full px-2 lg:px-4">
+  <div class="h-full w-full flex justify-around">
+    <ng-container *ngFor="let player of players">
+      <app-player-representation 
+        [name]="player.name" [score]="player.score" [color]="player.color" [totalScore]="getTotalScore()"
+        class="flex-1 mx-2 lg:mx-4 max-w-xs"
+      ></app-player-representation>
+    </ng-container>
   </div>
 </div>
