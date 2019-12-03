@@ -1,0 +1,119 @@
+{
+  "id": 1,
+  "categories": [{
+    "id": "computer",
+    "displayName": "Computer"
+  }, {
+    "id": "geographie",
+    "displayName": "geographie"
+  }, {
+    "id": "tiere",
+    "displayName": "tiere"
+  }],
+  "questions": [
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 100,
+    "question": "Wie heißt die kleinste Informationseinheit?",
+    "answer": "Bit"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 200,
+    "question": "Wofür steht die Abkürzung CPU?",
+    "answer": "Central Processing Unit"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 300,
+    "question": "Wie viele Zeichen beträgt die Maximale Länge für einen tweet",
+    "answer": "280"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 400,
+    "question": "13 ist der Binärcode für ...",
+    "answer": "1101"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 500,
+    "question": "Wer gilt als Erfinder des frei programmierbaren Computers?",
+    "answer": "Konrad Zuse"
+  },
+  {
+    "categorie": "geographie",
+    "status": "inactive",
+    "value": 100,
+    "question": "Welcher Fluss fließt durch London?",
+    "answer": "Themse"
+  },
+  {
+    "categorie": "geographie",
+    "status": "inactive",
+    "value": 200,
+    "question": "Wie lautet der Name einer Inka Ruinenstadt in Peru?",
+    "answer": "Machu Picchu"
+  },
+  {
+    "categorie": "geographie",
+    "status": "inactive",
+    "value": 300,
+    "question": "Wie heißt der höchste Gipfel der Alpen?",
+    "answer": "Mont Blanc"
+  },
+  {
+    "categorie": "geographie",
+    "status": "inactive",
+    "value": 400,
+    "question": "Bezeichnung für die Gezeiten Ebbe und Flut",
+    "answer": "Tiden"
+  },
+  {
+    "categorie": "geographie",
+    "status": "inactive",
+    "value": 500,
+    "question": "Wie heißt die Hauptstadt von Mazedonien?",
+    "answer": "Skopje"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 100,
+    "question": "Wie heißt die kleinste Informationseinheit?",
+    "answer": "Bit"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 200,
+    "question": "Wofür steht die Abkürzung CPU?",
+    "answer": "Central Processing Unit"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 300,
+    "question": "Wie viele Zeichen beträgt die Maximale Länge für einen tweet",
+    "answer": "280"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 400,
+    "question": "13 ist der Binärcode für ...",
+    "answer": "1101"
+  },
+  {
+    "categorie": "computer",
+    "status": "inactive",
+    "value": 500,
+    "question": "Wer gilt als Erfinder des frei programmierbaren Computers?",
+    "answer": "Konrad Zuse"
+  }]
+}

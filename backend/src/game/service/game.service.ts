@@ -3,7 +3,7 @@ import { Game, State, Player, Question, SelectedQuestion, VerifyOption, Buzzer }
 import { PubSub } from 'graphql-subscriptions';
 import { BehaviorSubject } from 'rxjs';
 
-const quiz = require("../../../assets/quiz.json");
+const quiz = require("../../../../mock-data/quiz.json");
 
 export const pubsub = new PubSub();
 
