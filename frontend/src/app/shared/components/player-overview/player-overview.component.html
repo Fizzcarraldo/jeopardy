@@ -2,6 +2,7 @@
   <div class="h-full w-full flex justify-around">
     <ng-container *ngFor="let player of players">
       <app-player-representation 
+        [activePlayer]="activePlayer" [id]="player.id"
         [name]="player.name" [score]="player.score" [color]="player.color" [totalScore]="getTotalScore()"
         class="flex-1 mx-2 lg:mx-4 max-w-xs"
       ></app-player-representation>

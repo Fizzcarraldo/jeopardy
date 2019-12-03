@@ -8,6 +8,7 @@ import { Player } from '../../game.model';
 })
 export class PlayerOverviewComponent {
   @Input() public players: Player[];
+  @Input() public activePlayer: number;
 
   constructor() { }
 
