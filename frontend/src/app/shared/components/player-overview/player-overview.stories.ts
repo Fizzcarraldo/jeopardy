@@ -41,7 +41,6 @@ const options = {
 export const NumberOfPlayers = () => ({
   component: PlayerOverviewComponent,
   props: {
-
     players: select('Number of Players', options, [{name: 'flo', score: 0, color:  '#E59726', id: 1}])
   },
 });

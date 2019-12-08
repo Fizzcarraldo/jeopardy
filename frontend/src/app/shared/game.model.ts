@@ -46,14 +46,22 @@ export class Categorie {
   displayName: string;
 }
 
+export class QuizContainer {
+  categories: Categorie[];
+  questionRows: QuestionRow[];
+}
+
+export class CategorieRow {
+  questions: Categorie[];
+}
+
+export class QuestionRow {
+  questions: Question[];
+}
+
 export class Question {
-  categorie: String;
-  owner: number;
-  status: string;
+  color: string;
   value: number;
-  question: string;
-  image?: string;
-  answer: string;
 }
 
 export class SelectedQuestion {

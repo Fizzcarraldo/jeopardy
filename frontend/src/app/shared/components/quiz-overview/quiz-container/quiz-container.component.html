@@ -1,0 +1,11 @@
+<div class="w-full h- flex flex-col">
+  <div class="w-full flex flex-row justify-around flex-np-wrap h-20p py-2">
+    <app-categorie *ngFor="let categorie of quizContainer.categories" class="px-2" [displayName]="categorie.displayName"></app-categorie>
+  </div>
+  <div class="flex-1 w-full flex flex-row justify-around">
+    <ng-container *ngFor="let questionRow of quizContainer.questionRows">
+      <app-question-row [questionRow]="questionRow" class="px-2"></app-question-row>
+    </ng-container>
+  </div>  
+</div>
+
