@@ -24,12 +24,12 @@ export class HostService {
     });
   }
 
-  public hostSelectQuestion(gameId: number, categorie: string, value: number) {
-    console.log(gameId, categorie, value);
+  public hostSelectQuestion(gameId: number, category: string, value: number) {
+    console.log(gameId, category, value);
     this.apollo.mutate({
       mutation: gql`
         mutation selectQuestion {
-          selectQuestion(gameId: ${gameId}, categorie: "${categorie}", value: ${value} )
+          selectQuestion(gameId: ${gameId}, category: "${category}", value: ${value} )
       }`
     }).subscribe( result => {
       console.log(result)

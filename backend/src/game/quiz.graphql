@@ -3,8 +3,33 @@ type Game {
   players: [Player]
   activePlayer: Int
   state: String
-  quiz: Quiz
   selectedQuestion: SelectedQuestion
+}
+
+type Host {
+  state: String
+  quizContainer: QuizOverview
+}
+
+type Stage {
+  state: String
+  players: [Player]
+  quizOverview: QuizOverview
+  activePlayer: Int
+}
+
+type QuizOverview {
+  categories: [Category]
+  questionRows: [QuestionRow]
+}
+
+type QuestionRow {
+  questionThumbnails: [QuestionThumbnail]
+}
+
+type QuestionThumbnail {
+  color: String
+  value: Int
 }
 
 type Buzzer {
@@ -19,29 +44,14 @@ type Player {
   score: Int
 }
 
-type Quiz {
-  id: Int
-  categories: [Category]
-  questions: [Question]
-}
-
 type Category {
   id: String
   displayName: String
 }
 
 type SelectedQuestion {
-  categorie: String
+  category: String
   value: Int
-}
-
-type Question {
-  categorie: String
-  owner: Int
-  value: Int
-  question: String
-  image: String
-  answer: String
 }
 
 type Subscription {
@@ -49,16 +59,15 @@ type Subscription {
 }
 
 type Query { 
-  getAllGames(id: Int): [Game]
-  getGame(gameId: Int!): Game
-  getQuiz(gameId: Int!): Quiz
+  getStage(gameId: Int!): Stage
+  getHost(gameId: Int!): Host
   getBuzzer(gameId: Int!, playerId: Int!): Buzzer
 }
 
 type Mutation {
   startNewGame(client: String): Int
   createPlayer(gameId: Int!, name: String): Int
-  selectQuestion(gameId: Int, categorie: String, value: Int): Boolean
+  selectQuestion(gameId: Int, category: String, value: Int): Boolean
   pushBuzzer(gameId: Int, playerId: Int): Boolean
   hostStartGame(gameId: Int, playerId: Int): Boolean
   verifyAnswer(gameId: Int, verfication: String): Boolean

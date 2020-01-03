@@ -24,10 +24,10 @@ export class HostMainComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(resolverData => {
       console.log(resolverData);
-      if (!resolverData.game.data.getGame) {
+      if (!resolverData.stage.data.getStage) {
         this.router.navigate(['index']);
       }
-      this.game = resolverData.game.data.getGame;
+      this.game = resolverData.stage.data.getStage;
     });
     this.gameId = +this.activatedRoute.snapshot.paramMap.get('gameId');
   }
@@ -37,7 +37,7 @@ export class HostMainComponent implements OnInit {
   }
 
   public selectQuestion(selectedQuestion: SelectedQuestion) {
-    this.hostService.hostSelectQuestion(this.gameId, selectedQuestion.categorie, selectedQuestion.value)
+    this.hostService.hostSelectQuestion(this.gameId, selectedQuestion.category, selectedQuestion.value)
   }
 
   public verifyAnswer(verifyOption: VerifyOption) {

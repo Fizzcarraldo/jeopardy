@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { QuizContainer } from 'src/app/shared/game.model';
+import { QuizOverview } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-quiz-container',
@@ -7,7 +7,7 @@ import { QuizContainer } from 'src/app/shared/game.model';
   styleUrls: ['./quiz-container.component.scss']
 })
 export class QuizContainerComponent implements OnInit {
-  @Input() public quizContainer: QuizContainer;
+  @Input() public quizOverview: QuizOverview;
 
   constructor() { }
 

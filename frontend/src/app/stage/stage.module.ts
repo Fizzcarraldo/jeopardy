@@ -4,7 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 import { IndexComponent } from './index/index.component';
 import { StageMainComponent } from './stage-main/stage-main.component';
 import { LobbyComponent } from './stage-main/lobby/lobby.component';
-import { PlayerListComponent } from './stage-main/player-list/player-list.component';
 import { QuizComponent } from './stage-main/quiz/quiz.component';
 import { SelectedQuestionComponent } from './stage-main/selected-question/selected-question.component';
 
@@ -13,7 +12,6 @@ import { SelectedQuestionComponent } from './stage-main/selected-question/select
     IndexComponent,
     LobbyComponent,
     StageMainComponent,
-    PlayerListComponent,
     QuizComponent,
     SelectedQuestionComponent
   ],

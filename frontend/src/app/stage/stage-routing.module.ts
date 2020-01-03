@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'stage/:gameId', 
     component: StageMainComponent,
     resolve: {
-      game: StageMainResolveService
+      stage: StageMainResolveService
     },
     runGuardsAndResolvers: "always"
   },

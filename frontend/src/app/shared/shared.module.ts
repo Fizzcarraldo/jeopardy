@@ -10,6 +10,7 @@ import { QuestionComponent } from './components/quiz-overview/question/question.
 import { QuestionRowComponent } from './components/quiz-overview/question-row/question-row.component';
 import { QuizContainerComponent } from './components/quiz-overview/quiz-container/quiz-container.component';
 import { CategorieComponent } from './components/quiz-overview/categorie/categorie.component';
+import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,16 +23,21 @@ import { CategorieComponent } from './components/quiz-overview/categorie/categor
     QuestionComponent,
     QuestionRowComponent,
     QuizContainerComponent,
-    CategorieComponent
+    CategorieComponent,
+    QuestionDetailComponent
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    CommonModule,
     BuzzerComponent,
     BuzzerHeaderComponent,
-    BuzzerLayoutComponent
+    BuzzerLayoutComponent,
+    StageLayoutComponent,
+    PlayerOverviewComponent,
+    QuizContainerComponent,
+    QuestionDetailComponent,
+    CommonModule
   ]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Game, State, Player, Question, SelectedQuestion, VerifyOption, Buzzer } from '../model/game.model';
+import { Game, State, Player, Question, SelectedQuestion, VerifyOption, Buzzer, Stage, QuizOverview, QuestionRow, QuestionThumbnail } from '../model/game.model';
 import { PubSub } from 'graphql-subscriptions';
 import { BehaviorSubject } from 'rxjs';
 
@@ -24,7 +24,7 @@ export class GameService {
       players: new Map(),
       activePlayer: null,
       state: State.Lobby,
-      quiz
+      quizOverview: this.newQuizOverview(5, 5)
     });
     this.gameMap.set(gameId, newGame);
     newGame.subscribe( game => {
@@ -34,13 +34,41 @@ export class GameService {
     return gameId;
   }
 
+  private newQuizOverview(categories: number, questions: number): QuizOverview {
+    const questionThumbnails: QuestionThumbnail[] = [];
+    for (let i = 1; i <= questions +1; i++) {
+      questionThumbnails.push({value: i*100});
+    }
+    const questionRows: QuestionRow[] = [];
+    for (let i = 0; i <= categories; i++) {
+      questionRows.push({questionThumbnails: questionThumbnails});
+    }
+    return {
+      categories: quiz.categories,
+      questionRows
+    }
+  }
+
   private getNumberOfGames(): number {
     return this.gameMap.size;
   }
 
   public getGame(gameId: number): BehaviorSubject<Game> {
-    return this.gameMap.get(gameId);
+   return this.gameMap.get(gameId);
   }
+
+  public getStage(gameId: number): Stage {
+    const game: Game = this.gameMap.get(gameId).getValue();
+    const stage: Stage = {
+      state: game.state,
+      players: Array.from( game.players.values() ),
+      activePlayer: game.activePlayer,
+      quizOverview: game.quizOverview
+    }
+    console.log(stage);
+    return stage;
+  }
+
 
   private getNumberOfPlayers(gameId: number): number {
     return this.gameMap.get(gameId).getValue().players.size;
@@ -69,14 +97,14 @@ export class GameService {
     return true;
   }
 
-  public selectQuestion(gameId: number, categorie: string, value: number): boolean {
+  public selectQuestion(gameId: number, category: string, value: number): boolean {
     const game = this.gameMap.get(gameId);
     const update = game.getValue();
     if (update.state != State.Select) {
       return false
     }
     const selectedQuestion: SelectedQuestion = {
-      categorie,
+      category,
       value
     }
     update.state = State.Buzzer;
@@ -111,7 +139,7 @@ export class GameService {
 
   private findSlectedQuestion(questions: Question[], selectedQuestion: SelectedQuestion): Question { 
     return questions.find( question => {
-      return question.value === selectedQuestion.value && question.categorie === selectedQuestion.categorie;
+      return question.value === selectedQuestion.value && question.category === selectedQuestion.category;
     });
   }
 
@@ -122,8 +150,7 @@ export class GameService {
       return false
     }
     const selectedQuestion: SelectedQuestion = update.selectedQuestion;
-    const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
-    question.owner = 0;
+    // const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
     update.state = State.Select;
     update.questionsAnswered ++;
     if ( this.gameOver(update) ) {
@@ -149,8 +176,8 @@ export class GameService {
     if (verfication === VerifyOption.Right) {
       activePlayer.score += selectedQuestion.value;
       update.selectedQuestion = null;
-      const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
-      question.owner = update.activePlayer;
+       
+      //const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
       update.activePlayer = null;
       update.state = State.Select;
       update.questionsAnswered ++;
@@ -163,7 +190,7 @@ export class GameService {
   }
 
   private gameOver(game: Game): boolean {
-    if ( game.questionsAnswered >= game.quiz.questions.length ) {
+    if ( game.questionsAnswered ) {
       return true;
     }
     return false;

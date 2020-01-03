@@ -16,8 +16,29 @@ export class Game {
   players: Map <number, Player>;
   activePlayer: number;
   state: State;
-  quiz?: Quiz;
+  quizOverview?: QuizOverview;
   selectedQuestion?: SelectedQuestion;
+}
+
+export class Stage {
+  state: String;
+  players: Player[];
+  quizOverview?: QuizOverview;
+  activePlayer: number;
+}
+
+export class QuizOverview {
+  categories: Category[];
+  questionRows: QuestionRow[];
+}
+
+export class QuestionRow {
+  questionThumbnails: QuestionThumbnail[]
+}
+
+export class QuestionThumbnail {
+  color?: String;
+  value: number;
 }
 
 export class Buzzer {
@@ -33,25 +54,24 @@ export interface Player {
 }
 
 export class SelectedQuestion {
-  categorie: String;
+  category: String;
   value: number;
 }
 
 export class Quiz {
   id: number;
-  categories: Categorie[];
+  categories: Category[];
   questions: Question[];
 }
 
-export class Categorie {
+export class Category {
   id: string;
   displayName: string;
 }
 
 export class Question {
   id: number;
-  categorie: string;
-  owner: number;
+  category: string;
   value: number;
   question: string;
   image?: string;

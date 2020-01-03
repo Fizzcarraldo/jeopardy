@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Quiz, Game, Question, Categorie } from '../model/game.model';
+
 import { GameService } from './game.service';
 import { BehaviorSubject } from 'rxjs';
 import { PlayerService } from './player.service';

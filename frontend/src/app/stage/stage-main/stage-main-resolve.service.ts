@@ -26,6 +26,6 @@ export class StageMainResolveService {
     this.gameService.subscribeGame(+gameId).subscribe( update => {
       this.reload();
     });
-    return this.gameService.getGame(+gameId);
+    return this.gameService.getStage(+gameId);
   }
 }

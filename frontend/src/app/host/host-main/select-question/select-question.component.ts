@@ -10,16 +10,16 @@ export class SelectQuestionComponent implements OnInit {
   @Input() quiz: Quiz;
   @Output() selectQuestion = new EventEmitter<SelectedQuestion>();
 
-  public selectedCategorie: String;
+  public selectedCategory: String;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public select(categorie: string, value: number) {
+  public select(category: string, value: number) {
     const selectedQuestion: SelectedQuestion = {
-      categorie,
+      category,
       value
     }
     this.selectQuestion.emit(selectedQuestion);

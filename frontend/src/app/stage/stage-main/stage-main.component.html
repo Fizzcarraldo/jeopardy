@@ -1,7 +1,7 @@
-<p>stage-main works!</p>
-<app-lobby *ngIf="game?.state === gameState.Lobby"></app-lobby>
-<app-player-list [players]="game?.players"></app-player-list>
-{{game?.state}}
-<app-quiz *ngIf="game?.state === gameState.Select" [quiz]="game?.quiz"></app-quiz>
-<app-selected-question *ngIf="game?.state === gameState.Buzzer" [selectedQuestion]="game?.selectedQuestion" [questions]="game?.quiz.questions"></app-selected-question>
+<app-stage-layout [gridVisible]="true">
+   
+  <app-quiz-container body [quizOverview]="stage.quizOverview"></app-quiz-container>
+
+  <!--app-player-overview footer [players]="players" ></app-player-overview-->
+</app-stage-layout>
 

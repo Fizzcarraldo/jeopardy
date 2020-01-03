@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Question } from 'src/app/shared/game.model';
+import { QuestionThumbnail } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-question',
@@ -7,7 +7,7 @@ import { Question } from 'src/app/shared/game.model';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
-  @Input() public question: Question;
+  @Input() public questionThumbnail: QuestionThumbnail;
 
   constructor() { }
 

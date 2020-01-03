@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StageService } from '../stage.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Game, State } from 'src/app/shared/game.model';
+import { Game, State, Stage } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-stage-main',
@@ -12,8 +12,10 @@ import { Game, State } from 'src/app/shared/game.model';
 export class StageMainComponent implements OnInit, OnDestroy {
 
   public gameId: number;
-  public game: Game;
+  public stage: Stage;
   public gameState: typeof State =  State;
+
+  public players =  [{name: 'flo', score: 0, color: '#E59726', id: 1}];
 
   private activatedRouteSubscription: Subscription;
   private initGameSubscription: Subscription;
@@ -27,11 +29,11 @@ export class StageMainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(resolverData => {
-      if (!resolverData.game.data.getGame) {
+      console.log(resolverData);
+      if (!resolverData.stage.data.getStage) {
         this.router.navigate(['index']);
       }
-      console.log(resolverData);
-      this.game = resolverData.game.data.getGame;
+      this.stage = resolverData.stage.data.getStage;
     });
     this.gameId = +this.activatedRoute.snapshot.paramMap.get('gameId');
   }

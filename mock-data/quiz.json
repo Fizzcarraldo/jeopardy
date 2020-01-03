@@ -7,6 +7,12 @@
     "id": "geographie",
     "displayName": "geographie"
   }, {
+    "id": "history",
+    "displayName": "geschichte"
+  }, {
+    "id": "sport",
+    "displayName": "sport"
+  }, {
     "id": "tiere",
     "displayName": "tiere"
   }],

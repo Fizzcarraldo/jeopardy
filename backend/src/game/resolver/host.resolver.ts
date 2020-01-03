@@ -21,10 +21,10 @@ export class HostResolver {
   @Mutation() 
   selectQuestion (
     @Args('gameId') gameId: number,
-    @Args('categorie') categorie: string,
+    @Args() category: string,
     @Args('value') value: number,
   ): Boolean {
-    return this.gameService.selectQuestion(gameId, categorie, value);;
+    return this.gameService.selectQuestion(gameId, category, value);;
   }
 
   @Mutation() 

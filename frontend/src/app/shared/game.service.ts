@@ -12,13 +12,24 @@ export class GameService {
     private apollo: Apollo
   ) { }
 
+  public getStage(gameId: number): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query getStage {
+          getStage(gameId: ${gameId})
+          { state players { name } activePlayer quizOverview { categories { displayName } questionRows { questionThumbnails { color value } } } }
+        }
+      `
+    });
+  }
+
   public getGame(gameId: number): Observable<any> {
     console.log(gameId)
     return this.apollo.query({
       query: gql`
         query getGame {
           getGame(gameId: ${gameId})
-          { state id selectedQuestion { categorie value} players { name } quiz { id categories { id displayName } questions { categorie value owner } } }
+          { state id selectedQuestion { category value} players { name } quiz { id categories { id displayName } questions { category value owner } } }
         }
       `
     });

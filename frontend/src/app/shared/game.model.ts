@@ -13,6 +13,12 @@ export enum VerifyOption {
   Wrong = "Wrong",
 }
 
+export class Stage {
+  state: State;
+  players: Player[];
+  quizOverview: QuizOverview
+}
+
 export class Game {
   players: Map <number, Player>;
   activePlayer: Player;
@@ -37,34 +43,30 @@ export interface Player {
 
 export class Quiz {
   id: number;
-  categories: Categorie[];
+  categories: Category[];
   questions: Question[];
 }
 
-export class Categorie {
+export class Category {
   id: string;
   displayName: string;
 }
 
-export class QuizContainer {
-  categories: Categorie[];
+export class QuizOverview {
+  categories: Category[];
   questionRows: QuestionRow[];
 }
 
-export class CategorieRow {
-  questions: Categorie[];
-}
-
 export class QuestionRow {
-  questions: Question[];
+  questionThumbnails: QuestionThumbnail[]
 }
 
-export class Question {
-  color: string;
+export class QuestionThumbnail {
+  color?: String;
   value: number;
 }
 
 export class SelectedQuestion {
-  categorie: string;
+  category: string;
   value: number;
 }
