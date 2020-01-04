@@ -17,7 +17,7 @@ export class BuzzerResolver {
     @Args('gameId') gameId: number,
     @Args('name') name: string
   ): number {
-    return this.playerService.createPlayer(gameId, name);
+    return this.gameService.addNewPlayer(gameId, name);
   }
 
   @Query()

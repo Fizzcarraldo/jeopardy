@@ -17,7 +17,7 @@ export class GameService {
       query: gql`
         query getStage {
           getStage(gameId: ${gameId})
-          { state players { name } activePlayer quizOverview { categories { displayName } questionRows { questionThumbnails { color value } } } }
+          { state players { color name } activePlayer quizOverview { categories { displayName } questionRows { questionThumbnails { color value } } } }
         }
       `
     });

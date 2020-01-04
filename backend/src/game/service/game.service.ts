@@ -36,11 +36,11 @@ export class GameService {
 
   private newQuizOverview(categories: number, questions: number): QuizOverview {
     const questionThumbnails: QuestionThumbnail[] = [];
-    for (let i = 1; i <= questions +1; i++) {
+    for (let i = 1; i < questions +1; i++) {
       questionThumbnails.push({value: i*100});
     }
     const questionRows: QuestionRow[] = [];
-    for (let i = 0; i <= categories; i++) {
+    for (let i = 0; i < categories; i++) {
       questionRows.push({questionThumbnails: questionThumbnails});
     }
     return {
@@ -65,7 +65,6 @@ export class GameService {
       activePlayer: game.activePlayer,
       quizOverview: game.quizOverview
     }
-    console.log(stage);
     return stage;
   }
 
@@ -74,14 +73,20 @@ export class GameService {
     return this.gameMap.get(gameId).getValue().players.size;
   }
 
-  public addNewPlayer(gameId: number, player: Player): number {
+  public addNewPlayer(gameId: number, name: string): number {
     const playerId = this.getNumberOfPlayers(gameId) + 1;
     const game = this.gameMap.get(gameId);
     const update = game.getValue();
+    const newPlayer: Player = {
+      name,
+      score: 0,
+      color: 'player' + (update.players.size + 1)
+    };
+
     if (update.state != State.Lobby) {
       return 0;
     }
-    update.players.set(playerId, player);
+    update.players.set(playerId, newPlayer);
     game.next(update);
     return playerId;
   }

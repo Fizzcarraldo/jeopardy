@@ -8,13 +8,7 @@ export class PlayerService {
 
   constructor(private readonly gameService: GameService) { }
 
-  public createPlayer(gameId: number, name: string): number {
-    const newPlayer: Player = {
-      name,
-      score: 0
-    }
-    return this.gameService.addNewPlayer(gameId, newPlayer);;
-  }
+
 
   /*
   public updateActivePlayer(gameId: number, playerId: number): Player {

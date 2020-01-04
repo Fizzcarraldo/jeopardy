@@ -1,7 +1,7 @@
 <app-stage-layout [gridVisible]="true">
    
-  <app-quiz-container body [quizOverview]="stage.quizOverview"></app-quiz-container>
-
-  <!--app-player-overview footer [players]="players" ></app-player-overview-->
+  <!--app-quiz-container body [quizOverview]="stage.quizOverview"></app-quiz-container -->
+  <app-stage-lobby body [buzzerUrl]="buzzerUrl" [hostUrl]="hostUrl"></app-stage-lobby>
+  <app-player-overview footer [players]="stage.players" ></app-player-overview>
 </app-stage-layout>
 

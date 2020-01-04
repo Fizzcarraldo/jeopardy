@@ -1,13 +1,13 @@
 import { withKnobs, text, number, color, select, radios, object } from '@storybook/addon-knobs';
 import {  moduleMetadata } from '@storybook/angular';
-import { Quiz, Question, QuestionRow, QuizContainer } from '../../game.model';
+import { QuestionRow, QuizOverview } from '../../game.model';
 import { QuestionComponent } from './question/question.component';
 import { QuestionRowComponent } from './question-row/question-row.component';
 import { QuizContainerComponent } from './quiz-container/quiz-container.component';
 import { CategorieComponent } from './categorie/categorie.component';
 
 
-const quiz: Quiz = require("../../../../../../mock-data/demo_quiz.json");
+//const quiz: Quiz = require("../../../../../../mock-data/demo_quiz.json");
 
 export default { 
   title: 'QuizOverview',
@@ -45,7 +45,7 @@ export const CategorieView = () => ({
 export const Queston = () => ({
   component: QuestionComponent,
   props: {
-    question: {
+    questionThumbnail: {
       color: select('Color', colors, '#8A8A8A'),
       value: select('Values', values, 100)
     }
@@ -53,7 +53,7 @@ export const Queston = () => ({
 });
 
 const questionRow = {
-  questions: [
+  questionThumbnails: [
     {
       "value": 100,
       "color": 'black',
@@ -84,7 +84,7 @@ export const QuestonRowView = () => ({
   },
 });
 
-const quizContainer: QuizContainer = {
+const quizOverview: QuizOverview = {
   categories: [
     {
       "id": "history",
@@ -115,7 +115,7 @@ const quizContainer: QuizContainer = {
 export const QuizContainerView = () => ({
   component: QuizContainerComponent,
   props: {
-    quizContainer: object('Quiz', quizContainer)
+    quizContainer: object('Quiz', quizOverview)
   },
 });
 

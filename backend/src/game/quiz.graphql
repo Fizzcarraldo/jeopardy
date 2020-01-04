@@ -41,6 +41,7 @@ type Buzzer {
 
 type Player {
   name: String
+  color: String
   score: Int
 }
 

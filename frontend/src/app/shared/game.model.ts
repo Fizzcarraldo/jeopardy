@@ -22,9 +22,8 @@ export class Stage {
 export class Game {
   players: Map <number, Player>;
   activePlayer: Player;
-  activeQuestion: Question;
+  activeQuestion: number;
   state: State;
-  quiz?: Quiz;
 }
 
 export class Buzzer {
@@ -39,12 +38,6 @@ export interface Player {
   score: number;
   color: string;
   id: number;
-}
-
-export class Quiz {
-  id: number;
-  categories: Category[];
-  questions: Question[];
 }
 
 export class Category {

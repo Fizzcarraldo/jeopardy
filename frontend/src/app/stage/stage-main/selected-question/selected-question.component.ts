@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SelectedQuestion, Question } from 'src/app/shared/game.model';
+import { SelectedQuestion, QuestionThumbnail } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-selected-question',
@@ -8,7 +8,7 @@ import { SelectedQuestion, Question } from 'src/app/shared/game.model';
 })
 export class SelectedQuestionComponent implements OnInit {
   @Input() selectedQuestion: SelectedQuestion;
-  @Input() questions: Question[];
+  @Input() questionThumbnails: QuestionThumbnail[];
 
   constructor() { }
 

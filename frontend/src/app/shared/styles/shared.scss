@@ -32,3 +32,35 @@ html, body, #root, .app {
 .pb-full {
   padding-bottom: 100%;
 }
+
+$color-player-inactive: #8A8A8A;
+$color-player1: #E59726;
+$color-player2: #006B60;
+$color-player3: #9A2511;
+$color-player4: #0065BD;
+$color-player5: #78961F;
+
+
+.background-color-player-inactive {
+  background-color: $color-player-inactive;
+}
+
+.background-color-player1 {
+  background-color: $color-player1;
+}
+
+.background-color-player2 {
+  background-color: $color-player2
+}
+
+.background-color-player3 {
+  background-color: $color-player3;
+}
+
+.background-color-player4 {
+  background-color: $color-player4;
+}
+
+.background-color-player5{
+  background-color: $color-player5;
+}

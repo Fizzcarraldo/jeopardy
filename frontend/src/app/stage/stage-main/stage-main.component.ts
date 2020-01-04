@@ -11,6 +11,9 @@ import { Game, State, Stage } from 'src/app/shared/game.model';
 })
 export class StageMainComponent implements OnInit, OnDestroy {
 
+  public buzzerUrl: string;
+  public hostUrl: string;
+
   public gameId: number;
   public stage: Stage;
   public gameState: typeof State =  State;
@@ -36,7 +39,21 @@ export class StageMainComponent implements OnInit, OnDestroy {
       this.stage = resolverData.stage.data.getStage;
     });
     this.gameId = +this.activatedRoute.snapshot.paramMap.get('gameId');
+    const urlOrigin: string = window.location.origin;
+    const buzzerSignin: string = '/buzzer/signin/'
+    this.buzzerUrl = urlOrigin + buzzerSignin + this.gameId;
+    const host: string = '/host/'
+    this.hostUrl = urlOrigin + host + this.gameId;
   }
+/*
+  this.pushBuzzerSubscription = this.activatedRoute.params.subscribe((params: Params) => {
+    const urlOrigin: string = window.location.origin;
+    const buzzerSignin: string = '/buzzer/signin/'
+    this.buzzerSigninUrl = urlOrigin + buzzerSignin + params.gameId;
+    const host: string = '/host/'
+    this.hostUrl = urlOrigin + host + params.gameId;
+  });
+  */
 
   ngOnDestroy() {
     if (this.activatedRouteSubscription) {

@@ -11,6 +11,7 @@ import { QuestionRowComponent } from './components/quiz-overview/question-row/qu
 import { QuizContainerComponent } from './components/quiz-overview/quiz-container/quiz-container.component';
 import { CategorieComponent } from './components/quiz-overview/categorie/categorie.component';
 import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
+import { StageLobbyComponent } from './components/stage-lobby/stage-lobby.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { QuestionDetailComponent } from './components/question-detail/question-d
     QuestionRowComponent,
     QuizContainerComponent,
     CategorieComponent,
-    QuestionDetailComponent
+    QuestionDetailComponent,
+    StageLobbyComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { QuestionDetailComponent } from './components/question-detail/question-d
     PlayerOverviewComponent,
     QuizContainerComponent,
     QuestionDetailComponent,
+    StageLobbyComponent,
     CommonModule
   ]
 })

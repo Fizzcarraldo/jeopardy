@@ -24,8 +24,8 @@ export class PlayerRepresentationComponent {
 
   public getBackgroundColor(): string {
     if (!this.activePlayer || this.activePlayer === this.id) {
-      return this.color;
+      return 'background-color-' + this.color;
     }
-    return '#8A8A8A';
+    return 'background-color-player-inactive';
   }
 }
