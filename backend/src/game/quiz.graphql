@@ -3,27 +3,24 @@ type Game {
   players: [Player]
   activePlayer: Int
   state: String
-  selectedQuestion: SelectedQuestion
+  activeQuestion: Question
 }
 
 type Host {
   state: String
-  quizContainer: QuizOverview
+  questionRows: [QuestionRow]
 }
 
 type Stage {
   state: String
   players: [Player]
-  quizOverview: QuizOverview
-  activePlayer: Int
-}
-
-type QuizOverview {
-  categories: [Category]
   questionRows: [QuestionRow]
+  activePlayer: Int
+  activeQuestion: Question
 }
 
 type QuestionRow {
+  category: Category
   questionThumbnails: [QuestionThumbnail]
 }
 
@@ -41,8 +38,9 @@ type Buzzer {
 
 type Player {
   name: String
-  color: String
   score: Int
+  color: String
+  id: Int
 }
 
 type Category {
@@ -50,9 +48,11 @@ type Category {
   displayName: String
 }
 
-type SelectedQuestion {
+type Question {
   category: String
   value: Int
+  question: String
+  answer: String
 }
 
 type Subscription {

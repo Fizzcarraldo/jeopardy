@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { BuzzerService } from '../buzzer.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Player, Buzzer } from 'src/app/shared/game.model';
+import { Player, Buzzer, State } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-buzzer-main',
@@ -13,6 +13,7 @@ import { Player, Buzzer } from 'src/app/shared/game.model';
 export class BuzzerMainComponent implements OnInit {
 
   public buzzer: Buzzer;
+  public gameState: typeof State =  State;
 
   constructor(
     private activatedRoute: ActivatedRoute,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HostService } from '../host.service';
 
-import { Game, State, SelectedQuestion, VerifyOption } from 'src/app/shared/game.model';
+import { Game, State, SelectedQuestion, VerifyOption, Stage } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-host-main',
@@ -12,7 +12,7 @@ import { Game, State, SelectedQuestion, VerifyOption } from 'src/app/shared/game
 export class HostMainComponent implements OnInit {
 
   public gameId: number;
-  public game: Game;
+  public stage: Stage;
   public gameState: typeof State =  State;
 
   constructor(
@@ -27,7 +27,7 @@ export class HostMainComponent implements OnInit {
       if (!resolverData.stage.data.getStage) {
         this.router.navigate(['index']);
       }
-      this.game = resolverData.stage.data.getStage;
+      this.stage = resolverData.stage.data.getStage;
     });
     this.gameId = +this.activatedRoute.snapshot.paramMap.get('gameId');
   }

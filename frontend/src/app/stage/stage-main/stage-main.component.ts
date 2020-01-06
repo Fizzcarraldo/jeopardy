@@ -18,7 +18,6 @@ export class StageMainComponent implements OnInit, OnDestroy {
   public stage: Stage;
   public gameState: typeof State =  State;
 
-  public players =  [{name: 'flo', score: 0, color: '#E59726', id: 1}];
 
   private activatedRouteSubscription: Subscription;
   private initGameSubscription: Subscription;

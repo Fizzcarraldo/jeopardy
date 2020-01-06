@@ -1,17 +1,18 @@
-<!--p>select-question works!</p>
-<div *ngIf="!selectedCategorie">
-  <button *ngFor="let categorie of quiz?.categories" (click)="selectedCategorie = categorie.id" class="btn btn-default">
-    {{categorie.id}}
-  </button>
-</div>
-<div *ngIf="selectedCategorie">
-  <button (click)="selectedCategorie = undefined" class="btn btn-default">
-    back
-  </button>
-  {{selectedCategorie}}
-  <ng-container *ngFor="let question of quiz.questions">
-    <button *ngIf="question.categorie === selectedCategorie && question.owner === null" (click)="select(selectedCategorie, question.value)" class="btn btn-default">
-      {{question.value}}
+<p>select-question works!</p>
+<div *ngFor="let questionRow of questionRows">
+  <div *ngIf="!selectedCategory">
+    <button (click)="selectedCategory = questionRow.category.id" class="btn btn-default">
+      {{questionRow.category.displayName}}
     </button>
-  </ng-container>
-</div-->
+  </div>
+  <div *ngIf="selectedCategory === questionRow.category.id">
+    <button (click)="selectedCategory = undefined" class="btn btn-default">
+      back
+    </button><br>
+    <button *ngFor="let questionThumbnail of questionRow.questionThumbnails"
+      (click)="select(selectedCategory, questionThumbnail.value)" class="btn btn-default">
+      {{questionThumbnail.value}}
+    </button>
+  </div>
+</div>
+

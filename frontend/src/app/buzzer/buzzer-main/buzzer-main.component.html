@@ -1,4 +1,4 @@
 <app-buzzer-layout>
-  <app-buzzer-header header [name]="player?.name" [score]="0" [playerColor]="'blue'"></app-buzzer-header>
-  <app-buzzer body (onClick)="pushBuzzer()"></app-buzzer>
+  <app-buzzer-header header [name]="buzzer?.player.name" [score]="0" [playerColor]="'blue'"></app-buzzer-header>
+  <app-buzzer body [disabled]="buzzer?.state != gameState.Buzzer" (onClick)="pushBuzzer()"></app-buzzer>
 </app-buzzer-layout>

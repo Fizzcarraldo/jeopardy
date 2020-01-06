@@ -18,175 +18,175 @@
   }],
   "questions": [
         {
-            "categorie": "history",
+            "category": "history",
             "value": 100,
             "status": "inactive",
             "question": "Welches der folgenden afrikanischen Länder war am erfolgreichsten darin, sich der Kolonialisierung zu widersetzen?",
             "answer": "Äthiopien"
         },
         {
-            "categorie": "history",
+            "category": "history",
             "value": 200,
             "status": "inactive",
             "question": "Wer hat die kommunistische Revolution in Russland angeführt?",
             "answer": "Vladimir Lenin"
         },
         {
-            "categorie": "history",
+            "category": "history",
             "value": 300,
             "status": "inactive",
             "question": "Für welche Zahl steht die römische Ziffer \"D\"?",
             "answer": "500"
         },
         {
-            "categorie": "history",
+            "category": "history",
             "value": 400,
             "status": "inactive",
             "question": "Wann wurde der Bau des Suezkanals abgeschlossen?",
             "answer": "1869"
         },
         {
-            "categorie": "history",
+            "category": "history",
             "value": 500,
             "status": "inactive",
             "question": "Welche Seeschlacht galt als Wendepunkt des Pacific Ocean Theatre im Zweiten Weltkrieg?",
             "answer": "Schlacht auf halbem Weg"
         },
         {
-            "categorie": "animals",
+            "category": "animals",
             "value": 100,
             "status": "inactive",
             "question": "Was ist das Sammelwort für eine Gruppe von Krähen?",
             "answer": "Mord"
         },
         {
-            "categorie": "animals",
+            "category": "animals",
             "value": 200,
             "status": "inactive",
             "question": "Wie heißt der Aufenthaltsort eines Kaninchens?",
             "answer": "Bau"
         },
         {
-            "categorie": "animals",
+            "category": "animals",
             "value": 300,
             "status": "inactive",
             "question": "Woraus besteht Nashorn?",
             "answer": "Keratin"
         },
         {
-            "categorie": "animals",
+            "category": "animals",
             "value": 400,
             "status": "inactive",
             "question": "Was bedeutet \"Nilpferd\" und in welcher Sprache?",
             "answer": "Flusspferd (Griechisch)"
         },
         {
-            "categorie": "animals",
+            "category": "animals",
             "value": 500,
             "status": "inactive",
             "question": "Wie hieß der äthiopische Wolf, bevor sie wussten, dass er mit Wölfen verwandt war?",
             "answer": "Simien Jackel"
         },
         {
-            "categorie": "film",
+            "category": "film",
             "value": 100,
             "status": "inactive",
             "question": "Wer führte Regie bei \"E.T. the Extra-Terrestrial\" (1982)?",
             "answer": "Steven Spielberg"
         },
         {
-            "categorie": "film",
+            "category": "film",
             "value": 200,
             "status": "inactive",
             "question": "\"Die erste Regel ist: Du redest nicht darüber\" ist ein Verweis auf welchen Film?",
             "answer": "Fight Club"
         },
         {
-            "categorie": "film",
+            "category": "film",
             "value": 300,
             "status": "inactive",
             "question": "In welchem ​​Film von 1973 spielt Yul Brynner einen Roboter-Cowboy, der versagt und einen Amoklauf unternimmt?",
             "answer": "Westworld"
         },
         {
-            "categorie": "film",
+            "category": "film",
             "value": 400,
             "status": "inactive",
             "question": "Wer spielte Sgt. Gordon Elias in \"Zug\" (1986)?",
             "answer": "Willem Dafoe"
         },
         {
-            "categorie": "film",
+            "category": "film",
             "value": 500,
             "status": "inactive",
             "question": "Nach welchen Vorbildern bewegte sich Baymax in Big Hero 6?",
             "answer": "Baby-Pinguine"
         },
         {
-            "categorie": "sports",
+            "category": "sports",
             "value": 100,
             "status": "inactive",
             "question": "Welcher Spieler hält den NHL-Rekord von 2.857 Punkten?",
             "answer": "Wayne Gretzky"
         },
         {
-            "categorie": "sports",
+            "category": "sports",
             "value": 200,
             "status": "inactive",
             "question": "Der kanadische Fernsehsportler ist bekannt für seine Rolle als \"Hockey Night in Canada\", eine Kommentarshow bei Hockeyspielen.",
             "answer": "Don Cherry"
         },
         {
-            "categorie": "sports",
+            "category": "sports",
             "value": 300,
             "status": "inactive",
             "question": "In welcher Nation fand die FIFA Fussball-Weltmeisterschaft 2006 statt?",
             "answer": "Deutschland"
         },
         {
-            "categorie": "sports",
+            "category": "sports",
             "value": 400,
             "status": "inactive",
             "question": "An welcher Brücke startet das jährliche Bootsrennen in Oxford und Cambridge?",
             "answer": "Putney"
         },
         {
-            "categorie": "sports",
+            "category": "sports",
             "value": 500,
             "status": "inactive",
             "question": "Welcher männliche Spieler gewann bei den Olympischen Spielen 2016 die Goldmedaille der Tischtennis-Singles?",
             "answer": "Ma Long (China)"
         },
         {
-            "categorie": "geopraphy",
+            "category": "geopraphy",
             "value": 100,
             "status": "inactive",
             "question": "Welcher US-Bundesstaat hat die höchste Einwohnerzahl?",
             "answer": "Kalifornien"
         },
         {
-            "categorie": "geopraphy",
+            "category": "geopraphy",
             "value": 200,
             "status": "inactive",
             "question": "Wie viele Länder grenzt Mexiko an?",
             "answer": "3"
         },
         {
-            "categorie": "geopraphy",
+            "category": "geopraphy",
             "value": 300,
             "status": "inactive",
             "question": "In welchem ​​afrikanischen Land ist Portugiesisch Amtssprache?",
             "answer": "Mosambik"
         },
         {
-            "categorie": "geopraphy",
+            "category": "geopraphy",
             "value": 400,
             "status": "inactive",
             "question": "Wo befindet sich die \"Sonora-Wüste\"?",
             "answer": "Nordamerika"
         },
         {
-            "categorie": "geopraphy",
+            "category": "geopraphy",
             "value": 500,
             "status": "inactive",
             "question": "Welche nordamerikanische Touristenattraktion wird von der Reisegesellschaft \"Maid of the Mist\" bedient?",

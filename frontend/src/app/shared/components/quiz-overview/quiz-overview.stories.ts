@@ -1,6 +1,6 @@
 import { withKnobs, text, number, color, select, radios, object } from '@storybook/addon-knobs';
 import {  moduleMetadata } from '@storybook/angular';
-import { QuestionRow, QuizOverview } from '../../game.model';
+import { QuestionRow } from '../../game.model';
 import { QuestionComponent } from './question/question.component';
 import { QuestionRowComponent } from './question-row/question-row.component';
 import { QuizContainerComponent } from './quiz-container/quiz-container.component';
@@ -10,7 +10,7 @@ import { CategorieComponent } from './categorie/categorie.component';
 //const quiz: Quiz = require("../../../../../../mock-data/demo_quiz.json");
 
 export default { 
-  title: 'QuizOverview',
+  title: 'QuestionRow',
   decorators: [
     withKnobs,
     moduleMetadata({ declarations: [QuestionComponent, QuestionRowComponent, CategorieComponent] }) 
@@ -52,7 +52,11 @@ export const Queston = () => ({
   },
 });
 
-const questionRow = {
+const questionRow: QuestionRow = {
+  category: {
+    "id": "history",
+    "displayName": "Geschichte"
+  }, 
   questionThumbnails: [
     {
       "value": 100,
@@ -84,38 +88,18 @@ export const QuestonRowView = () => ({
   },
 });
 
-const quizOverview: QuizOverview = {
-  categories: [
-    {
-      "id": "history",
-      "displayName": "Geschichte"
-    }, {
-      "id": "animals",
-      "displayName": "Tiere"
-    }, {
-      "id": "film",
-      "displayName": "Film"
-    }, {
-      "id": "sports",
-      "displayName": "Sport"
-    },  {
-      "id": "geopraphy",
-      "displayName": "Geografie"
-    }
-  ],
-  questionRows: [
-    questionRow,
-    questionRow,
-    questionRow,
-    questionRow,
-    questionRow
-  ]
-}
+const questionRows: QuestionRow[] = [
+  questionRow,
+  questionRow,
+  questionRow,
+  questionRow,
+  questionRow
+];
 
 export const QuizContainerView = () => ({
   component: QuizContainerComponent,
   props: {
-    quizContainer: object('Quiz', quizOverview)
+    questionRows: object('Quiz', questionRows)
   },
 });
 

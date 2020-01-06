@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Game, State, Player, Question, SelectedQuestion, VerifyOption, Buzzer, Stage, QuizOverview, QuestionRow, QuestionThumbnail } from '../model/game.model';
+import { Game, State, Player, Question, VerifyOption, Buzzer, Stage, QuestionRow, QuestionThumbnail } from '../model/game.model';
 import { PubSub } from 'graphql-subscriptions';
 import { BehaviorSubject } from 'rxjs';
 
-const quiz = require("../../../../mock-data/quiz.json");
+const quiz = require("../../../../mock-data/demo_quiz.json");
 
 export const pubsub = new PubSub();
 
@@ -24,7 +24,7 @@ export class GameService {
       players: new Map(),
       activePlayer: null,
       state: State.Lobby,
-      quizOverview: this.newQuizOverview(5, 5)
+      questionRows: this.newQuestionRows(5)
     });
     this.gameMap.set(gameId, newGame);
     newGame.subscribe( game => {
@@ -34,19 +34,20 @@ export class GameService {
     return gameId;
   }
 
-  private newQuizOverview(categories: number, questions: number): QuizOverview {
-    const questionThumbnails: QuestionThumbnail[] = [];
-    for (let i = 1; i < questions +1; i++) {
-      questionThumbnails.push({value: i*100});
-    }
+  private newQuestionRows(questions: number): QuestionRow[] {
     const questionRows: QuestionRow[] = [];
-    for (let i = 0; i < categories; i++) {
-      questionRows.push({questionThumbnails: questionThumbnails});
+    for (let i = 0; i < quiz.categories.length; i++) {
+      const questionThumbnails: QuestionThumbnail[] = [];
+      for (let j = 1; j < questions +1; j++) {
+        questionThumbnails.push({value: j*100});
+      }
+      const questionRow: QuestionRow = {
+        category: quiz.categories[i],
+        questionThumbnails
+      };
+      questionRows.push(questionRow);
     }
-    return {
-      categories: quiz.categories,
-      questionRows
-    }
+    return questionRows;
   }
 
   private getNumberOfGames(): number {
@@ -63,7 +64,8 @@ export class GameService {
       state: game.state,
       players: Array.from( game.players.values() ),
       activePlayer: game.activePlayer,
-      quizOverview: game.quizOverview
+      activeQuestion: game.activeQuestion,
+      questionRows: game.questionRows
     }
     return stage;
   }
@@ -78,6 +80,7 @@ export class GameService {
     const game = this.gameMap.get(gameId);
     const update = game.getValue();
     const newPlayer: Player = {
+      id: playerId,
       name,
       score: 0,
       color: 'player' + (update.players.size + 1)
@@ -104,18 +107,20 @@ export class GameService {
 
   public selectQuestion(gameId: number, category: string, value: number): boolean {
     const game = this.gameMap.get(gameId);
-    const update = game.getValue();
+    const update: Game = game.getValue();
     if (update.state != State.Select) {
       return false
     }
-    const selectedQuestion: SelectedQuestion = {
-      category,
-      value
-    }
     update.state = State.Buzzer;
-    update.selectedQuestion = selectedQuestion;
+    update.activeQuestion = this.findSlectedQuestion(quiz.questions, category, value);
     game.next(update);
     return true;
+  }
+
+  private findSlectedQuestion(questions: Question[], category: string, value: number): Question { 
+    return questions.find( question => {
+      return question.value === value && question.category === category;
+    });
   }
 
   public getBuzzer(gameId: number, playerId: number): Buzzer {
@@ -142,11 +147,7 @@ export class GameService {
     return true;
   }
 
-  private findSlectedQuestion(questions: Question[], selectedQuestion: SelectedQuestion): Question { 
-    return questions.find( question => {
-      return question.value === selectedQuestion.value && question.category === selectedQuestion.category;
-    });
-  }
+
 
   public skipAnswer(gameId: number) {
     const game: BehaviorSubject<Game> = this.getGame(gameId);
@@ -154,7 +155,7 @@ export class GameService {
     if (update.state != State.Buzzer) {
       return false
     }
-    const selectedQuestion: SelectedQuestion = update.selectedQuestion;
+    // const selectedQuestion: SelectedQuestion = update.selectedQuestion;
     // const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
     update.state = State.Select;
     update.questionsAnswered ++;
@@ -169,20 +170,18 @@ export class GameService {
     const game: BehaviorSubject<Game> = this.getGame(gameId);
     const update: Game = game.getValue();
     const activePlayer: Player = update.players.get(update.activePlayer);
-    const selectedQuestion: SelectedQuestion = update.selectedQuestion;
+   // const selectedQuestion: SelectedQuestion = update.selectedQuestion;
     if (update.state != State.Answer) {
       return false
     }
     if (verfication === VerifyOption.Wrong) {
       update.state = State.Buzzer;
-      activePlayer.score -= selectedQuestion.value;
+      activePlayer.score -= update.activeQuestion.value;
       update.activePlayer = null;
     }
     if (verfication === VerifyOption.Right) {
-      activePlayer.score += selectedQuestion.value;
-      update.selectedQuestion = null;
-       
-      //const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
+      activePlayer.score += update.activeQuestion.value;
+      update.activeQuestion = null;
       update.activePlayer = null;
       update.state = State.Select;
       update.questionsAnswered ++;

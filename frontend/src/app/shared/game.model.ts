@@ -16,7 +16,7 @@ export enum VerifyOption {
 export class Stage {
   state: State;
   players: Player[];
-  quizOverview: QuizOverview
+  questionRows: QuestionRow[]
 }
 
 export class Game {
@@ -45,12 +45,8 @@ export class Category {
   displayName: string;
 }
 
-export class QuizOverview {
-  categories: Category[];
-  questionRows: QuestionRow[];
-}
-
 export class QuestionRow {
+  category: Category;
   questionThumbnails: QuestionThumbnail[]
 }
 

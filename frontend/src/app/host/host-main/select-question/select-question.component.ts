@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SelectedQuestion } from 'src/app/shared/game.model';
+import { SelectedQuestion, QuestionRow } from 'src/app/shared/game.model';
 
 @Component({
   selector: 'app-select-question',
@@ -7,6 +7,7 @@ import { SelectedQuestion } from 'src/app/shared/game.model';
   styleUrls: ['./select-question.component.scss']
 })
 export class SelectQuestionComponent implements OnInit {
+  @Input() questionRows: QuestionRow[];
   @Output() selectQuestion = new EventEmitter<SelectedQuestion>();
 
   public selectedCategory: String;
@@ -23,5 +24,4 @@ export class SelectQuestionComponent implements OnInit {
     }
     this.selectQuestion.emit(selectedQuestion);
   }
-
 }

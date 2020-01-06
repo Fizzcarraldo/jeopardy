@@ -1,7 +1,7 @@
 <app-stage-layout [gridVisible]="true">
-   
-  <!--app-quiz-container body [quizOverview]="stage.quizOverview"></app-quiz-container -->
-  <app-stage-lobby body [buzzerUrl]="buzzerUrl" [hostUrl]="hostUrl"></app-stage-lobby>
-  <app-player-overview footer [players]="stage.players" ></app-player-overview>
+  <app-stage-lobby *ngIf="stage.state === gameState.Lobby" body [buzzerUrl]="buzzerUrl" [hostUrl]="hostUrl"></app-stage-lobby>
+  <app-quiz-container *ngIf="stage.state === gameState.Select" body [questionRows]="stage.questionRows"></app-quiz-container>
+  <app-question-detail *ngIf="stage.state === gameState.Buzzer || stage.state === gameState.Answer" body [question]="stage.activeQuestion.question"></app-question-detail>
+  <app-player-overview footer [players]="stage.players" [activePlayer]="stage.activePlayer" ></app-player-overview>
 </app-stage-layout>
 

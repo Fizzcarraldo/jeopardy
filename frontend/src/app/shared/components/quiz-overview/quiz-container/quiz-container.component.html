@@ -1,9 +1,6 @@
 <div class="w-full h- flex flex-col">
-  <div class="w-full flex flex-row justify-around flex-np-wrap h-20p py-2">
-    <app-categorie *ngFor="let category of quizOverview.categories" class="px-2" [displayName]="category.displayName"></app-categorie>
-  </div>
   <div class="flex-1 w-full flex flex-row justify-around">
-    <ng-container *ngFor="let questionRow of quizOverview.questionRows">
+    <ng-container *ngFor="let questionRow of questionRows">
       <app-question-row [questionRow]="questionRow" class="px-2"></app-question-row>
     </ng-container>
   </div>  

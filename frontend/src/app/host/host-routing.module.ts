@@ -8,7 +8,7 @@ const routes: Routes = [
     path: 'host/:gameId',
     component: HostMainComponent,
     resolve: {
-      game: HostMainResolveService
+      stage: HostMainResolveService
     },
     runGuardsAndResolvers: "always"
   }

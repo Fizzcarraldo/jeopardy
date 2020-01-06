@@ -1,10 +1,19 @@
 <!--p>host-mian works!</p>
-{{game?.state}}
+
 {{game?.state }}
-<button *ngIf="game?.state === gameState.Lobby" class="btn btn-default" (click)="startGame()">start Game</button>
-<app-select-question *ngIf="game?.state === gameState.Select" [quiz]="game?.quiz" (selectQuestion)="selectQuestion($event)"></app-select-question>
+
+
 <app-skip-answer *ngIf="game?.state === gameState.Buzzer" (skipAnswer)="skipAnswer()"></app-skip-answer>
 <app-verify-answer *ngIf="game?.state === gameState.Answer" (verifyAnswer)="verifyAnswer($event)"></app-verify-answer>
 
 
 <button (click)="reload()">ff</button-->
+
+<app-buzzer-layout>
+  <div header> {{stage?.state}}</div>
+  <div body>
+    <button *ngIf="stage?.state === gameState.Lobby" class="btn btn-default" (click)="startGame()">start Game</button>
+    <app-select-question *ngIf="stage?.state === gameState.Select" [questionRows]="stage.questionRows" (selectQuestion)="selectQuestion($event)"></app-select-question>
+    <app-verify-answer *ngIf="stage?.state === gameState.Answer" (verifyAnswer)="verifyAnswer($event)"></app-verify-answer>
+  </div>
+</app-buzzer-layout>
