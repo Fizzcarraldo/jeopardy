@@ -181,6 +181,8 @@ export class GameService {
     }
     if (verfication === VerifyOption.Right) {
       activePlayer.score += update.activeQuestion.value;
+      this.updateQuestionRowColor(update.questionRows, update.activeQuestion, activePlayer.color);
+      update.activeQuestion.value = 2000;
       update.activeQuestion = null;
       update.activePlayer = null;
       update.state = State.Select;
@@ -193,11 +195,20 @@ export class GameService {
     return true;
   }
 
+  private updateQuestionRowColor(questionRows: QuestionRow[], question: Question, color: string): QuestionRow[] {
+    const questionRow: QuestionRow = questionRows.find( questionRow => questionRow.category.id === question.category );
+    const questionThumbnail: QuestionThumbnail =
+      questionRow.questionThumbnails.find( questionThumbnail => questionThumbnail.value === question.value );
+    questionThumbnail.color = color;
+    return questionRows;
+  }
+
   private gameOver(game: Game): boolean {
+    return false;
     if ( game.questionsAnswered ) {
       return true;
     }
-    return false;
+
   }
 
 }

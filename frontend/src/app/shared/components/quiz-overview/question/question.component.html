@@ -1,3 +1,3 @@
-<div class="w-full h-full flex justify-center items-center rounded-full text-white text-lg lg:text-2xl font-bold" [style.background-color]="questionThumbnail.color">
+<div class="w-full h-full flex justify-center items-center rounded-full text-white text-lg lg:text-2xl font-bold" [ngClass]="'background-color-' + questionThumbnail.color">
   {{ questionThumbnail.value }}
 </div>

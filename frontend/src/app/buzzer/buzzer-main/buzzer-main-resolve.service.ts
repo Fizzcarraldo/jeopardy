@@ -25,10 +25,7 @@ export class BuzzerMainResolveService {
     state: RouterStateSnapshot
   ): Observable<any> {
     const gameId: string = route.paramMap.get('gameId');
-    const playerId: string = route.paramMap.get('playerId');
-    console.log(gameId);
-    console.log(playerId);
-    
+    const playerId: string = route.paramMap.get('playerId');    
     this.gameService.subscribeGame(+gameId).subscribe( update => {
       this.reload();
     });
