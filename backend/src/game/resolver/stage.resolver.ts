@@ -27,6 +27,7 @@ export class StageResolver {
     @Args('gameId') gameId: number,
   ) {
     return this.gameService.gameSubscription(gameId);
+
   }
 
   /*

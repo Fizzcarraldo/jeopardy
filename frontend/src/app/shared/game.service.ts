@@ -12,19 +12,36 @@ export class GameService {
     private apollo: Apollo
   ) { }
 
+  private gameSubscription: Observable<any>; 
+  
+  private subscribeGame(gameId: number) {
+    this.gameSubscription =  this.apollo.subscribe({
+      query: gql`
+        subscription gameSubscription {
+        gameSubscription(gameId: ${gameId})
+      }`
+    });
+  }
+
+  public getGameSubscription(gameId: number): Observable<any> {
+    if (!this.gameSubscription) {
+      this.subscribeGame(gameId);
+    }
+    return this.gameSubscription;
+  }
+
   public getStage(gameId: number): Observable<any> {
     return this.apollo.query({
       query: gql`
         query getStage {
           getStage(gameId: ${gameId})
-            { state players { color name id score } activePlayer activeQuestion { category value question answer} questionRows { category { displayName id } questionThumbnails { color value } } }
+            { state players { color name id score } activePlayer activeQuestion { category value question answer} questionRows { category { displayName id } questionThumbnails { color value answerd } } }
         }
       `
     });
   }
 
   public getGame(gameId: number): Observable<any> {
-    console.log(gameId)
     return this.apollo.query({
       query: gql`
         query getGame {
@@ -32,15 +49,6 @@ export class GameService {
           { state id selectedQuestion { category value} players { name } quiz { id categories { id displayName } questions { category value owner } } }
         }
       `
-    });
-  }
-
-  public subscribeGame(gameId: number): Observable<any> {
-    return this.apollo.subscribe({
-      query: gql`
-        subscription gameSubscription {
-        gameSubscription(gameId: ${gameId})
-      }`
     });
   }
 }

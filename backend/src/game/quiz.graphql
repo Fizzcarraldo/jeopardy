@@ -25,6 +25,7 @@ type QuestionRow {
 }
 
 type QuestionThumbnail {
+  answerd: Boolean
   color: String
   value: Int
 }

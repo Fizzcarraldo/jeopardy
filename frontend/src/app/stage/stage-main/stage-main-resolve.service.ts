@@ -23,7 +23,7 @@ export class StageMainResolveService {
     state: RouterStateSnapshot
   ): Observable<any> {
     const gameId: string = route.paramMap.get('gameId');
-    this.gameService.subscribeGame(+gameId).subscribe( update => {
+    this.gameService.getGameSubscription(+gameId).subscribe( update => {
       this.reload();
     });
     return this.gameService.getStage(+gameId);

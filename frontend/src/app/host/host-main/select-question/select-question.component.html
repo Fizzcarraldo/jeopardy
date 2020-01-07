@@ -9,10 +9,11 @@
     <button (click)="selectedCategory = undefined" class="btn btn-default">
       back
     </button><br>
-    <button *ngFor="let questionThumbnail of questionRow.questionThumbnails"
-      (click)="select(selectedCategory, questionThumbnail.value)" class="btn btn-default">
-      {{questionThumbnail.value}}
-    </button>
+    <ng-container *ngFor="let questionThumbnail of questionRow.questionThumbnails">
+      <button *ngIf="!questionThumbnail.answerd" (click)="select(selectedCategory, questionThumbnail.value)" class="btn btn-default">
+        {{questionThumbnail.value}}
+      </button>
+    </ng-container>
   </div>
 </div>
 

@@ -147,19 +147,16 @@ export class GameService {
     return true;
   }
 
-
-
   public skipAnswer(gameId: number) {
     const game: BehaviorSubject<Game> = this.getGame(gameId);
     const update: Game = game.getValue();
     if (update.state != State.Buzzer) {
       return false
     }
-    // const selectedQuestion: SelectedQuestion = update.selectedQuestion;
-    // const question = this.findSlectedQuestion(update.quiz.questions, selectedQuestion);
+    this.updateQuestionRowColor(update.questionRows, update.activeQuestion, 'player-inactive');
     update.state = State.Select;
     update.questionsAnswered ++;
-    if ( this.gameOver(update) ) {
+    if ( this.gameOver(update.questionsAnswered, 5) ) {
       update.state = State.GameOver;
     }
     game.next(update);
@@ -170,7 +167,6 @@ export class GameService {
     const game: BehaviorSubject<Game> = this.getGame(gameId);
     const update: Game = game.getValue();
     const activePlayer: Player = update.players.get(update.activePlayer);
-   // const selectedQuestion: SelectedQuestion = update.selectedQuestion;
     if (update.state != State.Answer) {
       return false
     }
@@ -182,12 +178,11 @@ export class GameService {
     if (verfication === VerifyOption.Right) {
       activePlayer.score += update.activeQuestion.value;
       this.updateQuestionRowColor(update.questionRows, update.activeQuestion, activePlayer.color);
-      update.activeQuestion.value = 2000;
       update.activeQuestion = null;
       update.activePlayer = null;
       update.state = State.Select;
       update.questionsAnswered ++;
-      if ( this.gameOver(update) ) {
+      if ( this.gameOver(update.questionsAnswered, 5) ) {
         update.state = State.GameOver;
       }
     }
@@ -195,20 +190,19 @@ export class GameService {
     return true;
   }
 
-  private updateQuestionRowColor(questionRows: QuestionRow[], question: Question, color: string): QuestionRow[] {
+  private updateQuestionRowColor(questionRows: QuestionRow[], question: Question, color: string): void {
     const questionRow: QuestionRow = questionRows.find( questionRow => questionRow.category.id === question.category );
     const questionThumbnail: QuestionThumbnail =
       questionRow.questionThumbnails.find( questionThumbnail => questionThumbnail.value === question.value );
     questionThumbnail.color = color;
-    return questionRows;
+    questionThumbnail.answerd = true;
   }
 
-  private gameOver(game: Game): boolean {
-    return false;
-    if ( game.questionsAnswered ) {
+  private gameOver(answerdQuestions: number, numberOfQuestions: number): boolean {
+    if ( answerdQuestions >= numberOfQuestions ) {
       return true;
     }
-
+    return false;
   }
 
 }

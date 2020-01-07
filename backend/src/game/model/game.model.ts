@@ -34,6 +34,7 @@ export class QuestionRow {
 }
 
 export class QuestionThumbnail {
+  answerd?: boolean;
   color?: String;
   value: number;
 }

@@ -10,10 +10,15 @@
 <button (click)="reload()">ff</button-->
 
 <app-buzzer-layout>
-  <div header> {{stage?.state}}</div>
+  <div header>
+    {{stage?.state}}
+    <div *ngIf="stage?.state === gameState.Answer">{{stage?.activeQuestion.answer}}</div>
+  </div>
   <div body>
     <button *ngIf="stage?.state === gameState.Lobby" class="btn btn-default" (click)="startGame()">start Game</button>
     <app-select-question *ngIf="stage?.state === gameState.Select" [questionRows]="stage.questionRows" (selectQuestion)="selectQuestion($event)"></app-select-question>
+    <app-skip-answer *ngIf="stage?.state === gameState.Buzzer" (skipAnswer)="skipAnswer()"></app-skip-answer>
     <app-verify-answer *ngIf="stage?.state === gameState.Answer" (verifyAnswer)="verifyAnswer($event)"></app-verify-answer>
+
   </div>
 </app-buzzer-layout>

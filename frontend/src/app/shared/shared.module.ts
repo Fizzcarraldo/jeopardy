@@ -12,6 +12,7 @@ import { QuizContainerComponent } from './components/quiz-overview/quiz-containe
 import { CategorieComponent } from './components/quiz-overview/categorie/categorie.component';
 import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
 import { StageLobbyComponent } from './components/stage-lobby/stage-lobby.component';
+import { StageGameoverComponent } from './components/stage-gameover/stage-gameover.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StageLobbyComponent } from './components/stage-lobby/stage-lobby.compon
     QuizContainerComponent,
     CategorieComponent,
     QuestionDetailComponent,
-    StageLobbyComponent
+    StageLobbyComponent,
+    StageGameoverComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { StageLobbyComponent } from './components/stage-lobby/stage-lobby.compon
     QuizContainerComponent,
     QuestionDetailComponent,
     StageLobbyComponent,
+    StageGameoverComponent,
     CommonModule
   ]
 })
